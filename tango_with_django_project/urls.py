@@ -16,11 +16,11 @@
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from e15wad import views
+from realm import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('e15wad/', include('e15wad.urls')),
-    # The above maps any URLs starting with e15wad/ to be handled by e15wad.
+    path('realm/', include('realm.urls')),
+    # The above maps any URLs starting with realm/ to be handled by realm.
     path('admin/', admin.site.urls),
  ]

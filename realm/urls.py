@@ -1,8 +1,8 @@
 
 from django.urls import path
-from e15wad import views
+from realm import views
 
-app_name = 'e15wad'
+app_name = 'realm'
 urlpatterns = [
  
  path('', views.index, name='index'),

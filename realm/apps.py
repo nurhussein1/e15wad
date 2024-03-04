@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class E15WadConfig(AppConfig):
+class RealmConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "e15wad"
+    name = "realm"
