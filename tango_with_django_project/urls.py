@@ -15,7 +15,12 @@
 
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from e15wad import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
+    path('e15wad/', include('e15wad.urls')),
+    # The above maps any URLs starting with e15wad/ to be handled by e15wad.
     path('admin/', admin.site.urls),
-]
+ ]
