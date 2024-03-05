@@ -19,7 +19,7 @@ from django.urls import include
 from realm import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.home, name='home'),
     path('realm/', include('realm.urls')),
     # The above maps any URLs starting with realm/ to be handled by realm.
     path('admin/', admin.site.urls),
