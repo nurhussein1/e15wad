@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        title>Reading Realm Home</title>
+        <title>Reading Realm - Home</title>
     </head>
     
     <body>
-        <h1>REalm Team say...</h1>
+        <h1>Realm Team says...</h1>
         <div>
             hey there partner! <br />
             <strong>{{ boldmessage }}</strong><br />
         </div>
         <div>
-            <a href="/realm/about/">About</a><br />
-            <a href="/realm/register/">Register</a><br />
+            <ul>
+                {% if user.is_authenticated %}
+                <!-- Show these links when the user is logged in -->
+                
+                <li><p>Just a placeholder text</p></li>
+                {% else %}
+                <!-- Show these links when the user is NOT logged in -->
+                <li><a href="/realm/register/">Register</a></li>
+                <li><a href="/realm/login/">Login</a></li>
+                {% endif %}
+                <!-- Outside the conditional statements, ALWAYS show -->
+                <li><a href="/realm/about/">About</a></li>
+                <li><a href="/realm/categories/">Categories</a></li>
+                <li><a href="/realm/popularbooks/">Popular Books</a><br /></li>
+                <li><a href="/realm/account/">My Account</a></li>
+            </ul>                
         </div>
-    
     </body>
 </html>
