@@ -11,10 +11,10 @@
             <strong>{{ boldmessage }}</strong><br />
         </div>
         <div>
-        	<a href="/realm">Home</a><br />
-			<a href="/realm/account/profilepicture">Change Profile Picture</a><br />
-			<a href="/realm/account/myreviews">My Reviews</a><br />
-			<a href="/realm/account/mybooks">My Books</a><br />
+        	<li><a href="{% url 'home' %}">Home</a></li>
+			<a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a><br />
+            <a href="{% url 'realm:MyReviews' %}">My Reviews</a><br />
+            <a href="{% url 'realm:MyBooks' %}">My Books</a><br />
         </div>
     
     </body>

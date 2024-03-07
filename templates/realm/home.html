@@ -18,14 +18,14 @@
                 <li><p>Just a placeholder text</p></li>
                 {% else %}
                 <!-- Show these links when the user is NOT logged in -->
-                <li><a href="/realm/register/">Register</a></li>
-                <li><a href="/realm/login/">Login</a></li>
+                <li><a href="{% url 'realm:Register' %}">Register</a><li>
+                <li><a href="{% url 'realm:Login' %}">Login</a><li>
                 {% endif %}
                 <!-- Outside the conditional statements, ALWAYS show -->
-                <li><a href="/realm/about/">About</a></li>
-                <li><a href="/realm/categories/">Categories</a></li>
-                <li><a href="/realm/popularbooks/">Popular Books</a><br /></li>
-                <li><a href="/realm/account/">My Account</a></li>
+                <li><a href="{% url 'realm:About' %}">About</a><li>
+                <li><a href="{% url 'realm:Categories' %}">Categories</a><li>
+                <li><a href="{% url 'realm:PopularBooks' %}">Popular Books</a><li>
+                <li><a href="{% url 'realm:Account' %}">My Account</a><li>
             </ul>                
         </div>
     </body>

@@ -11,12 +11,12 @@
             <strong>{{ boldmessage }}</strong><br />
         </div>
         <div>
-            <a href="/realm">Home</a><br />
-            <a href="/realm/categories/historical">Historical</a><br />
-            <a href="/realm/categories/scifi">Science Fiction</a><br />
-            <a href="/realm/categories/classics">Classics</a><br />
-            <a href="/realm/categories/thriller">Thriller</a><br />
-            <a href="/realm/categories/fantasy">Fantasy</a><br />
+            <li><a href="{% url 'home' %}">Home</a><li>
+            <a href="{% url 'realm:Historical' %}">Historical</a><br />
+            <a href="{% url 'realm:SciFi' %}">Science Fiction</a><br />
+            <a href="{% url 'realm:Classics' %}">Classics</a><br />
+            <a href="{% url 'realm:Thriller' %}">Thriller</a><br />
+            <a href="{% url 'realm:Fantasy' %}">Fantasy</a><br />
         </div>
     </body>
 </html>
