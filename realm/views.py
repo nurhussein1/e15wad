@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from realm.models import Category, Page
 
 # Create your views here.
 def home(request):
@@ -27,8 +28,10 @@ def login(request):
     return render(request, 'realm/login.html', context=context_dict)
 
 def categories(request):
- 
-    context_dict = {'boldmessage': 'this is the categories page, test that context_dict works'}
+    context_dict = {
+        'boldmessage': 'this is the categories page, test that context_dict works',
+        'categories': Category.objects.order_by('-likes')[:5]
+    }
     return render(request, 'realm/categories.html', context=context_dict)
 
 def popularbooks(request):
@@ -57,26 +60,77 @@ def mybooks(request):
     return render(request, 'realm/account/mybooks.html', context=context_dict)
 
 def historical(request):
- 
-    context_dict = {'boldmessage': 'this is the historicals page, test that context_dict works'}
+    context_dict = {}
+    category_name_slug = 'historical'
+    
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['pages'] = None
+    
     return render(request, 'realm/categories/historical.html', context=context_dict)
 
 def scifi(request):
- 
-    context_dict = {'boldmessage': 'this is the science fiction page, test that context_dict works'}
+    context_dict = {}
+    category_name_slug = 'scifi'
+    
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['pages'] = None
+    
     return render(request, 'realm/categories/scifi.html', context=context_dict)
 
 def classics(request):
- 
-    context_dict = {'boldmessage': 'this is the classics page, test that context_dict works'}
+    context_dict = {}
+    category_name_slug = 'classics'
+    
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['pages'] = None
+    
     return render(request, 'realm/categories/classics.html', context=context_dict)
 
 def thriller(request):
- 
-    context_dict = {'boldmessage': 'this is the thrillers page, test that context_dict works'}
+    context_dict = {}
+    category_name_slug = 'thriller'
+
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        print(pages)  # Debug: Check if pages are fetched correctly
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['pages'] = None
+
     return render(request, 'realm/categories/thriller.html', context=context_dict)
 
 def fantasy(request):
- 
-    context_dict = {'boldmessage': 'this is the fantasy page, test that context_dict works'}
+    context_dict = {}
+    category_name_slug = 'fantasy'
+    
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['pages'] = None
+    
     return render(request, 'realm/categories/fantasy.html', context=context_dict)

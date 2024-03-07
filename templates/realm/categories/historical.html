@@ -11,7 +11,17 @@
             <strong>{{ boldmessage }}</strong><br />
         </div>
         <div>
-            <a href="/realm/categories/">Categories</a><br />
+            <a href="{% url 'realm:Categories' %}">Categories</a><br />
+        </div>
+        <div>
+            <h2>Historical Books</h2>
+            <ul>
+                {% for page in pages %}
+                    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                {% empty %}
+                    <li>No historical books found.</li>
+                {% endfor %}
+            </ul>
         </div>
     
     </body>

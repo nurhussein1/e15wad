@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Reading Realm - Catergories</title>
-    </head>
-
-    <body>
-        <h1>Realm Team says...</h1>
-        <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
-        </div>
-        <div>
-            <li><a href="{% url 'home' %}">Home</a><li>
-            <a href="{% url 'realm:Historical' %}">Historical</a><br />
-            <a href="{% url 'realm:SciFi' %}">Science Fiction</a><br />
-            <a href="{% url 'realm:Classics' %}">Classics</a><br />
-            <a href="{% url 'realm:Thriller' %}">Thriller</a><br />
-            <a href="{% url 'realm:Fantasy' %}">Fantasy</a><br />
-        </div>
-    </body>
+<head>
+    <title>Reading Realm - Categories</title>
+</head>
+<body>
+    <h1>Realm Team says...</h1>
+    <div>
+        hey there partner! <br />
+        <strong>{{ boldmessage }}</strong><br />
+    </div>
+    <div>
+        <ul>
+            <li><a href="{% url 'realm:Home' %}">Home</a></li>
+            <li><a href="{% url 'realm:Historical' %}">Historical</a></li>
+            <li><a href="{% url 'realm:SciFi' %}">Sci-Fi</a></li>
+            <li><a href="{% url 'realm:Thriller' %}">Thriller</a></li>
+            <li><a href="{% url 'realm:Fantasy' %}">Fantasy</a></li>
+            <li><a href="{% url 'realm:Classics' %}">Classics</a></li>
+        </ul>
+    </div>
+</body>
 </html>
