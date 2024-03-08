@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{book.title}}</title>
+        <style>
+            a {color: blue;}
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>{{book.title}}</h1>
+
+        </header>
+        <main>
+            <div>
+                <blockquote>
+                    {% if book.description %}
+                    {{book.description}}
+                    {% else %}
+                    No Description
+                    {% endif %}
+
+                </blockquote>
+            </div>
+            <div>
+                <blockquote>
+                    {% if book.estimatedreadingtime %}
+                    {{book.estimatedreadingtime}}
+                    {% else %}
+                    No Estimated Reading Time Specified
+                    {% endif %} 
+                </blockquote>
+            </div>
+        </main>
+        <footer></footer>
+            <p>Find Out More <a href="{{book.url}}">Here</a></p>
+            <p>About the <a href="{{book.author}}">Author</a></p>
+            <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
+        </footer>
+    </body>
+</html>

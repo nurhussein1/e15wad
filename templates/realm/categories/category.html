@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reading Realm - {{ category.name }} Books</title>
+    </head>
+    
+    <body>
+        <h1>Reading Realm - {{ category.name }} Books</h1>
+        <div>
+            Discover history's stories with our curated selection. Explore different eras and learn about the events that
+        shaped our world. <br />
+            <strong>{{ boldmessage }}</strong><br />
+        </div>
+        <div>
+            <h2>{{ category.name }} Books</h2>
+            <ul>
+                {% for book in books %}
+                    <li><a href="{% url 'realm:book' book.slug%}">{{ book.title }}</a></li>
+                {% empty %}
+                    <li>No historical books found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
+        </div>
+    
+    </body>
+</html>
+
+

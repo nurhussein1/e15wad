@@ -1,8 +1,8 @@
 from django.contrib import admin
-from realm.models import Category, Page, UserProfile
+from realm.models import Category, Book
+from realm.models import UserProfile
 
-
-class PageAdmin(admin.ModelAdmin):
+class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'url') 
     
 class CategoryAdmin(admin.ModelAdmin):
@@ -12,6 +12,6 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 
 
-admin.site.register(Page, PageAdmin)
+admin.site.register(Book, BookAdmin)
 
 admin.site.register(UserProfile)

@@ -6,17 +6,18 @@
 <body>
     <h1>Realm Team says...</h1>
     <div>
-        hey there partner! <br />
+        Find the category that speaks to your heart 
+        <span style='font-size:10px;'>&#127775;</span> <br />
         <strong>{{ boldmessage }}</strong><br />
     </div>
     <div>
+        <a href="{% url 'realm:Home' %}">Home</a>
+    </div>
+    <div>
         <ul>
-            <li><a href="{% url 'realm:Home' %}">Home</a></li>
-            <li><a href="{% url 'realm:Historical' %}">Historical</a></li>
-            <li><a href="{% url 'realm:SciFi' %}">Sci-Fi</a></li>
-            <li><a href="{% url 'realm:Thriller' %}">Thriller</a></li>
-            <li><a href="{% url 'realm:Fantasy' %}">Fantasy</a></li>
-            <li><a href="{% url 'realm:Classics' %}">Classics</a></li>
+            {% for category in categories %}
+            <li><a href="{% url 'realm:category' category.slug %}">{{category.name}}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </body>

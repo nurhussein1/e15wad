@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from realm.models import Category, Page
+from django.http import HttpResponse,HttpRequest
+from realm.models import Category, Book,UserProfile
+from realm.forms import UserForm
+from django.forms import HiddenInput,Field
+
+from os.path import join
 
 # Create your views here.
 def home(request):
@@ -30,7 +34,7 @@ def login(request):
 def categories(request):
     context_dict = {
         'boldmessage': 'this is the categories page, test that context_dict works',
-        'categories': Category.objects.order_by('-likes')[:5]
+        'categories': Category.objects.all()
     }
     return render(request, 'realm/categories.html', context=context_dict)
 
@@ -59,78 +63,61 @@ def mybooks(request):
     context_dict = {'boldmessage': 'this is the my books page, test that context_dict works'}
     return render(request, 'realm/account/mybooks.html', context=context_dict)
 
-def historical(request):
+def category(request,category_name_slug):
     context_dict = {}
-    category_name_slug = 'historical'
     
     try:
         category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
-        context_dict['pages'] = pages
+        pages = Book.objects.filter(category=category)
+        context_dict['books'] = pages
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['category'] = None
-        context_dict['pages'] = None
+        context_dict['books'] = None
     
-    return render(request, 'realm/categories/historical.html', context=context_dict)
+    return render(request, 'realm/categories/category.html', context=context_dict)
 
-def scifi(request):
+def book(request,book_name_slug):
     context_dict = {}
-    category_name_slug = 'scifi'
     
     try:
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-        context_dict['pages'] = None
+        book = Book.objects.get(slug=book_name_slug)
+        context_dict['book'] = book
+    except Book.DoesNotExist:
+        context_dict['book'] = None
     
-    return render(request, 'realm/categories/scifi.html', context=context_dict)
+    return render(request, 'realm/book/book.html', context=context_dict)
 
-def classics(request):
-    context_dict = {}
-    category_name_slug = 'classics'
+def webimg(request):
+
+    return HttpResponse(b"",status=404,reason="Not Found")
+
+def userauth(request:HttpRequest,user_control_form_slug):
     
-    try:
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-        context_dict['pages'] = None
+
     
-    return render(request, 'realm/categories/classics.html', context=context_dict)
 
-def thriller(request):
-    context_dict = {}
-    category_name_slug = 'thriller'
+    form=UserForm()
+    if(user_control_form_slug!="register"):
+        for i in ("email",):
+            email:Field =form.fields.get(i)
+            email.is_hidden=True
+            email.widget=HiddenInput()
+            email.required=False
+        
+    if(request.method.lower()=="post"):
+        if(user_control_form_slug=="register"):
+            userProfile,created= UserProfile.objects.get_or_create(defaults=request.POST,name=request.POST.get("username"))
+            if(not created):
+                return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
+        elif(user_control_form_slug=="login"):
+            try:
+                userProfile = UserProfile.objects.get(name=request.POST.get("username"))
+            except UserProfile.DoesNotExist:
+                form.add_error("username",f"No User {request.POST.get('username')} found")
+                return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
 
-    try:
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
-        print(pages)  # Debug: Check if pages are fetched correctly
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-        context_dict['pages'] = None
 
-    return render(request, 'realm/categories/thriller.html', context=context_dict)
+    form.hidden_fields
+    return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
 
-def fantasy(request):
-    context_dict = {}
-    category_name_slug = 'fantasy'
-    
-    try:
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
-        context_dict['pages'] = pages
-        context_dict['category'] = category
-    except Category.DoesNotExist:
-        context_dict['category'] = None
-        context_dict['pages'] = None
-    
-    return render(request, 'realm/categories/fantasy.html', context=context_dict)

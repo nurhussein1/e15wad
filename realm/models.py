@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
     slug = models.SlugField()
+    description = models.TextField(default="No Desctiption Availible")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -20,17 +19,29 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Page(models.Model):
+class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
     url = models.URLField()
-    views = models.IntegerField(default=0)
+    description=models.TextField(null=True)
+    slug=models.SlugField(unique=True)
+    # bookcover = models.ImageField()
+    estimatedreadingtime=models.TextField(null=True,default="0hrs 30mins")
+    author = models.URLField()
+
+    def save(self,*args,**kwargs):
+        self.slug=slugify(self.title)
+        super(Book,self).save(*args,**kwargs)
 
     def __str__(self):
         return self.title
+
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_images', blank=True)
+    user=models.OneToOneField(User,models.CASCADE,null=True)
+    name = models.TextField(null=True)
+    email=models.EmailField(null=True)
+    # prefrences = models.TextChoices()
+    profilepicture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
-        return self.user.username
+     return self.username
