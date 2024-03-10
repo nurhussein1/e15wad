@@ -24,4 +24,5 @@ urlpatterns = [
     path('realm/', include('realm.urls')),
     # The above maps any URLs starting with realm/ to be handled by realm.
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
  ]

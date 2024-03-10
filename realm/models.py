@@ -38,10 +38,9 @@ class Book(models.Model):
 
 class UserProfile(models.Model):
     user=models.OneToOneField(User,models.CASCADE,null=True)
-    name = models.TextField(null=True)
     email=models.EmailField(null=True)
     # prefrences = models.TextChoices()
     profilepicture = models.ImageField(upload_to='profile_images', blank=True)
 
     def __str__(self):
-     return self.username
+        return self.user.username

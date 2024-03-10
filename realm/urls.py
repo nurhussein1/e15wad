@@ -7,7 +7,7 @@ app_name = 'realm'
 urlpatterns = [
     path('', views.home, name='Home'),
     path('about/', views.about, name='About'),
-    path('register/', views.userauth, name='register',kwargs={'user_control_form_slug':'register'}),
+    #path('register/', views.userauth, name='register',kwargs={'user_control_form_slug':'register'}),
     # path('login/', views.login, name='Login'),
     path('categories/', views.categories, name='Categories'),
     path('popularbooks/', views.popularbooks, name='PopularBooks'),
@@ -19,7 +19,7 @@ urlpatterns = [
     # path('categories/scifi/', views.scifi, name='SciFi'),
     path('categories/<slug:category_name_slug>/', views.category, name='category',),
     path('book/<slug:book_name_slug>/', views.book, name='book',),
-    path('login/', views.userauth, name='login',kwargs={'user_control_form_slug':'login'}),
+    #path('login/', views.userauth, name='login',kwargs={'user_control_form_slug':'login'}),
     # path('categories/thriller/', views.thriller, name='Thriller'),
     # path('categories/fantasy/', views.fantasy, name='Fantasy'),
 ]
