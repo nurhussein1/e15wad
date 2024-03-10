@@ -21,7 +21,7 @@ def about(request):
  # Return a rendered response to send to the client.
  return render(request, 'realm/about.html', context=context_dict)
 
-def register(request):
+""" def register(request):
  
     context_dict = {'boldmessage': 'this is the register page, test that context_dict works'}
     return render(request, 'realm/register.html', context=context_dict)
@@ -29,7 +29,7 @@ def register(request):
 def login(request):
  
     context_dict = {'boldmessage': 'this is the login page, test that context_dict works'}
-    return render(request, 'realm/login.html', context=context_dict)
+    return render(request, 'realm/login.html', context=context_dict) """
 
 def categories(request):
     context_dict = {
@@ -92,11 +92,7 @@ def webimg(request):
 
     return HttpResponse(b"",status=404,reason="Not Found")
 
-def userauth(request:HttpRequest,user_control_form_slug):
-    
-
-    
-
+""" def userauth(request:HttpRequest,user_control_form_slug):
     form=UserForm()
     if(user_control_form_slug!="register"):
         for i in ("email",):
@@ -120,4 +116,4 @@ def userauth(request:HttpRequest,user_control_form_slug):
 
     form.hidden_fields
     return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
-
+  """
