@@ -44,9 +44,10 @@ def popularbooks(request):
     return render(request, 'realm/popularbooks.html', context=context_dict)
 
 def account(request):
- 
-    context_dict = {'boldmessage': 'this is the account page, test that context_dict works'}
-    return render(request, 'realm/account.html', context=context_dict)
+    user_profiles = UserProfile.objects.all()
+    return render(request, 'realm/account.html', {'user_profiles': user_profiles})
+    
+
 
 def profilepicture(request):
  
