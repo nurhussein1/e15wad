@@ -4,6 +4,7 @@ from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
 from realm.models import Book,Category,UserProfile
+from registration.forms import RegistrationForm
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128,
                            help_text="Please enter the category name.")
@@ -12,16 +13,8 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ('name',)
 
-class UserForm(forms.ModelForm):
-    
-    username=forms.CharField(max_length=128,strip=True,min_length=4,required=True,label="Username:",help_text="Please Enter a Username")
-    email=forms.EmailField()
-    cleaned_data={}
-        
-        
-    class Meta:
-        model=UserProfile
-        fields=('username',)
+class UserForm(RegistrationForm):
+    profilepicture = forms.ImageField(required = False)
 
 class BookForm(forms.ModelForm):
     title = forms.CharField(max_length=128,
