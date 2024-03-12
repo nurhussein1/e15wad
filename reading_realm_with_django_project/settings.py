@@ -127,7 +127,6 @@ LOGIN_URL = 'auth_login'
 
 STATIC_URL = '/static/'
 
-#Add this in your settings.py file:
 STATICFILES_DIRS = [
-    STATIC_DIR,
+    os.path.join(BASE_DIR, 'static'),
 ]
