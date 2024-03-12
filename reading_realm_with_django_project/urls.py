@@ -14,9 +14,11 @@
 #     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 
 from django.contrib import admin
-from django.urls import path
-from django.urls import include
+from django.urls import path, include
+from django.conf.urls.static import static
+from django.conf import settings
 from realm import views
+from realm.regbackend import RealmRegistrationView
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -24,5 +26,6 @@ urlpatterns = [
     path('realm/', include('realm.urls')),
     # The above maps any URLs starting with realm/ to be handled by realm.
     path('admin/', admin.site.urls),
+    path('accounts/register/', RealmRegistrationView.as_view(), name = 'registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
- ]
+ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

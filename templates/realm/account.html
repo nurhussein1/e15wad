@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% if user %}
 <html>
     <head>
         <title>Reading Realm - My Account</title>
@@ -6,16 +7,26 @@
     
     <body>
         <h1>Realm Team says...</h1>
+            <br>
+                {% if UserProfile.profilepicture %}
+                    <img src="{{ user_profile.profilepicture.url }}">
+                {% else %}
+                    <!-- Handle the case where the user has no profile picture -->
+                    <p>No profile picture available</p>
+                {% endif %}
+            <br/>
         <div>
             hey there partner! <br />
             <strong>{{ boldmessage }}</strong><br />
+            <li><a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a><br /></li>
+            <li><a href="{% url 'realm:MyReviews' %}">My Reviews</a><br /></li>
+            <li><a href="{% url 'realm:MyBooks' %}">My Books</a><br /></li>
+
         </div>
         <div>
-        	<li><a href="{% url 'home' %}">Home</a></li>
-			<a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a><br />
-            <a href="{% url 'realm:MyReviews' %}">My Reviews</a><br />
-            <a href="{% url 'realm:MyBooks' %}">My Books</a><br />
+        	<a href="{% url 'home' %}">Home</a>
         </div>
     
     </body>
 </html>
+{% endif %}
