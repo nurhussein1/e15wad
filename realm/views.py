@@ -43,11 +43,6 @@ def popularbooks(request):
     context_dict = {'boldmessage': 'this is the popular books page, test that context_dict works'}
     return render(request, 'realm/popularbooks.html', context=context_dict)
 
-def account(request):
-    user_profiles = UserProfile.objects.all()
-    return render(request, 'realm/account.html', {'user_profiles': user_profiles})
-    
-
 
 def profilepicture(request):
  
@@ -92,6 +87,17 @@ def book(request,book_name_slug):
 def webimg(request):
 
     return HttpResponse(b"",status=404,reason="Not Found")
+
+def account(request):
+    # Retrieve the profile picture URL
+    profile_picture_url = None
+    if request.user.is_authenticated:
+        if hasattr(request.user, 'userprofile'):
+            profile_picture = request.user.userprofile.profilepicture
+            if profile_picture:
+                profile_picture_url = profile_picture.url
+
+    return render(request, 'realm/account.html', {'profile_picture_url': profile_picture_url})
 
 """ def userauth(request:HttpRequest,user_control_form_slug):
     form=UserForm()
