@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reading Realm - 
+        {% block title_block %}
+            A Reading Heaven
+        {% endblock %}
+        </title>
+        <link rel="stylesheet" type="text/css" href="{% static 'CSS/basestyles.css' %}">
+    
+        <!-- yoyo this is where the CSS coms in -->
+    </head>
+    <body>
+        <!-- the nav bar of the website -->
+         <nav class="navigation">
+            <div class="logo-container">
+                <img src="{% static 'black_logo.png' %}" alt="Reading Realm Logo">
+                <a href="{% url 'realm:Home' %}">
+                    <h1 id="title">ReadingRealm</h1>
+                </a>
+            </div>
+            <ul>
+                <li><a href="{% url 'realm:Home' %}">Home</a></li>
+                <li><a href="{% url 'realm:PopularBooks' %}">Popular Books</a></li>
+                <li><a href="{% url 'realm:Categories' %}">Categories</a></li>
+                <li><a href="{% url 'realm:About' %}">About</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'auth_logout' %}?next={% url 'home' %}">Logout</a></li>
+                <li><a href="{% url 'realm:Account' %}">My Account</a></li>
+                {% else %}
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <!-- main body of the page -->
+        {% block body_block %}
+        {% endblock %}
+            <hr />
+
+    </body>
+</html>

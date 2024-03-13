@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-{% if user %}
-<html>
-    <head>
-        <title>Reading Realm - My Account</title>
-    </head>
-    
-    <body>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Account
+{% endblock %}
+
+{% block body_block %}
         <h1>Realm Team says...</h1>
             <br>
                
@@ -30,4 +30,4 @@
     
     </body>
 </html>
-{% endif %}
+{% endblock %}
