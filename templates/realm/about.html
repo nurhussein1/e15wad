@@ -1,26 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <title>Reading Realm - About</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-
-<nav class="navigation">
-    <div class="logo-container">
-        <img src="{% static 'black_logo.png' %}" alt="Reading Realm Logo">
-        <h1 class="title">Reading Realm</h1>
-    </div>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">Login</a></li>
-    </ul>
-</nav>
+{% block title_block %}
+About
+{% endblock %}
+{% block body_block %}
 <div class="about-section">
     <img src="{% static 'books.png' %}" width="400" height="300"
         style="float: right; margin-top: 100px; margin-right: 100px;">
@@ -30,8 +14,6 @@
         immersive world of books, stories, and adventures crafted to ignite your imagination and love for reading.
     </p>
 </div>
-
-
-</body>
+{% endblock %}
 
 </html>

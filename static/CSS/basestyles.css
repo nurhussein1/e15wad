@@ -1,0 +1,124 @@
+/* -----------------------------GENERAL PAGE STYLING-------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* h1 {
+    margin-top: 2%;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    color: rgb(0, 0, 0);
+    font-family: Helvetica;
+    text-align: left;
+} */
+
+body {
+    background-color: #F1FADA;
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    font-family: Trebuchet MS;
+}
+
+div {
+    background-color: #9AD0C2;
+    padding: 10px;
+    margin: 10px;
+}
+
+hr {
+    border: none; /* Remove default border */
+    height: 3px; /* Increase thickness */
+    background-color: #265073; /* Change color */
+    margin: 20px 0; /* Add margin for spacing */
+    border-radius: 5px;
+}
+
+
+
+/* ------------------------------ALL THE NAV BAR STUFF ----------------------------*/
+.navigation div{
+    background-color: #2D9596;
+    padding:0%;
+}
+
+.navigation h1 {
+    color: rgb(0, 0, 0);
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-family: Helvetica;
+    text-align: left;
+    font-size: 2.5em;
+}
+
+.navigation {    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2D9596;
+    padding: 10px 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.navigation ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0 1rem;
+    gap: 1.5rem;
+    list-style-type: none;
+}
+
+.navigation img {
+    width: 4rem;
+    margin-right: 1rem;
+}
+
+.navigation a {
+    list-style-type: none;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+}
+
+/* ----------------------------------------HOME PAGE STYLING------------------------------- */
+.container {
+    display: flex;
+    background-color: #F1FADA;
+}
+
+.column {
+    flex: 1; /* Distribute available space equally */
+    padding: 10px; /* Adjust padding as needed */
+}
+
+.column h1 {
+    margin-top: 4px;
+    margin-left: 4px;
+    color: rgb(0, 0, 0);
+    font-family: Helvetica;
+    text-align: left;
+}
+
+.column h2 {
+    margin-top: 4px;
+    margin-left: 4px;
+    color: rgb(0, 0, 0);
+    font-family: Helvetica;
+    text-align: left;
+}
+
+
+/* ----------------------------------------LOGIN PAGE STYLING--------------------------------- */
+.bookCentre {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set container height to viewport height */
+}

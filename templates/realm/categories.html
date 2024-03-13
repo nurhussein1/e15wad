@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Reading Realm - Categories</title>
-</head>
-<body>
-    <h1>Realm Team says...</h1>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Categories
+{% endblock %}
+
+{% block body_block %}
     <div>
+        <h1>Realm Team says...</h1>
         Find the category that speaks to your heart 
         <span style='font-size:10px;'>&#127775;</span> <br />
         <strong>{{ boldmessage }}</strong><br />
@@ -20,5 +22,4 @@
             {% endfor %}
         </ul>
     </div>
-</body>
-</html>
+{% endblock %}
