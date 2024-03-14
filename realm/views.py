@@ -101,12 +101,12 @@ def account(request):
 
 def profilepicture(request):
  
-    #if request.method == 'POST':
+    if request.method == 'POST':
         # Assuming the user profile is related to the User model
         
-    profile = request.user.userprofile
-    profile.profilepicture = request.FILES['profile_pic']
-    profile.save()
+        profile = request.user.userprofile
+        profile.profilepicture = request.FILES['profile_pic']
+        profile.save()
         # Redirect to the user's profile page
 
     return render(request, 'realm/account/profilepicture.html')
