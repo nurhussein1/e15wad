@@ -6,14 +6,82 @@ About
 {% endblock %}
 {% block body_block %}
 <div class="about-section">
-    <img src="{% static 'books.png' %}" width="400" height="300"
-        style="float: right; margin-top: 100px; margin-right: 100px;">
     <h1>About Us</h1>
     <p>
         Welcome to Reading Realm, your go-to platform for all things literature and reading-related. Dive into our
         immersive world of books, stories, and adventures crafted to ignite your imagination and love for reading.
     </p>
+
+    <div class="founders-box">
+        <div class="founders-container">
+            <h1>Founders</h1>
+            <div class="founders-row">
+                <div class="founder">
+                    <img src="{% static 'founders/founder1.jpg' %}" alt="Founder 1">
+                    <div class="founder-info">
+                        <h2>Arda Callialp</h2>
+                        <p>Operation Military</p>
+                        <div class="social-icons">
+                            <img src="{% static 'socials.png' %}" alt="Social Media Icons">
+                        </div>
+                    </div>
+                </div>
+                <div class="founder">
+                    <img src="{% static 'founders/founder2.jpg' %}" alt="Founder 2">
+                    <div class="founder-info">
+                        <h2>Nur Hussein</h2>
+                        <p>Visionary Strategist</p>
+                        <div class="social-icons">
+                            <img src="{% static 'socials.png' %}" alt="Social Media Icons">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="founders-row">
+                <div class="founder">
+                    <img src="{% static 'founders/founder3.jpg' %}" alt="Founder 3">
+                    <div class="founder-info">
+                        <h2>Magnus Wallace</h2>
+                        <p>Product Development Expert</p>
+                        <div class="social-icons">
+                            <img src="{% static 'socials.png' %}" alt="Social Media Icons">
+                        </div>
+                    </div>
+                </div>
+                <div class="founder">
+                    <img src="{% static 'founders/founder4.jpg' %}" alt="Founder 4">
+                    <div class="founder-info">
+                        <h2>Arif Shuaibu</h2>
+                        <p>Marketing Guru</p>
+                        <div class="social-icons">
+                            <img src="{% static 'socials.png' %}" alt="Social Media Icons">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="founders-row">
+                <div class="founder">
+                    <img src="{% static 'founders/founder5.jpg' %}" alt="Founder 5">
+                    <div class="founder-info">
+                        <h2>Adam Tong</h2>
+                        <p>Financial Wizard</p>
+                        <div class="social-icons">
+                            <img src="{% static 'socials.png' %}" alt="Social Media Icons">
+                        </div>
+                    </div>
+                </div>
+                <div class="founder">
+                    <img src="{% static 'founders/founder6.jpg' %}" alt="Founder 6">
+                    <div class="founder-info">
+                        <h2>Dafydd Evans</h2>
+                        <p>Technology Enthusiast</p>
+                        <div class="social-icons">
+                            <img src="{% static 'socials.png' %}" alt="Social Media Icons">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
-
-</html>
