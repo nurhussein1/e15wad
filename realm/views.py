@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
-from realm.models import Category, Book,UserProfile
+from realm.models import Category, Book, UserProfile
 from realm.forms import UserForm
 from django.forms import HiddenInput,Field
 
@@ -44,10 +44,7 @@ def popularbooks(request):
     return render(request, 'realm/popularbooks.html', context=context_dict)
 
 
-def profilepicture(request):
- 
-    context_dict = {'boldmessage': 'this is the profile picture page, test that context_dict works'}
-    return render(request, 'realm/account/profilepicture.html', context=context_dict)
+
 
 def myreviews(request):
  
@@ -92,12 +89,30 @@ def account(request):
     # Retrieve the profile picture URL
     profile_picture_url = None
     if request.user.is_authenticated:
+
+
+        ##display profile
         if hasattr(request.user, 'userprofile'):
             profile_picture = request.user.userprofile.profilepicture
             if profile_picture:
                 profile_picture_url = profile_picture.url
 
     return render(request, 'realm/account.html', {'profile_picture_url': profile_picture_url})
+
+def profilepicture(request):
+ 
+    #if request.method == 'POST':
+        # Assuming the user profile is related to the User model
+        
+    profile = request.user.userprofile
+    profile.profilepicture = request.FILES['profile_pic']
+    profile.save()
+        # Redirect to the user's profile page
+
+    return render(request, 'realm/account/profilepicture.html')
+
+
+    
 
 """ def userauth(request:HttpRequest,user_control_form_slug):
     form=UserForm()

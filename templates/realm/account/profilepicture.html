@@ -1,18 +1,20 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Reading Realm - My Profile Picture</title>
-    </head>
-    
-    <body>
-        <h1>Realm Team says...</h1>
-        <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
-        </div>
-        <div>
-            <a href="/realm/account/">My Account</a><br />
-        </div>
-    
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Profile Picture</title>
+</head>
+<body>
+    <h2>Change Profile Picture</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="profile_pic">
+        <button type="submit">Upload</button>
+    </form>
+    <div>
+        <a href="/realm/account">My Account</a><br />
+    </div>
+</body>
 </html>
