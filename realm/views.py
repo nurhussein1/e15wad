@@ -118,6 +118,37 @@ def purchase(request):
 def rent(request):
     context_dict = {'boldmessage': 'this is the Rent page, '}
     return render(request, 'realm/purchaseOrRent/rent.html', context=context_dict)
+
+def favourite_category(request):
+    category_list = Category.objects.all()
+    context_dict={}
+    context_dict['categories'] = category_list
+    context_dict['user'] = request.user
+    context_dict['userprofile'] = request.user.userprofile
+    selected_categories = []
+    for category in category_list:
+        if request.POST.get(category.name):
+            selected_categories.append(category)
+    if hasattr(request.user, 'userprofile'):
+        for category in selected_categories:
+            request.user.userprofile.favourite_categories.add(category)
+            if request.user.userprofile.selected_favourites == False:
+                request.user.userprofile.selected_favourites = True
+            request.user.userprofile.save()
+    return render(request, 'realm/favouriteCategories.html', context=context_dict)
+
+def recommendations(request):
+    context_dict = {}
+    recommended = []
+    if hasattr(request.user, 'userprofile'):
+        context_dict['userprofile'] = request.user.userprofile
+        if request.user.userprofile.selected_favourites == True:
+            favourites = request.user.userprofile.favourite_categories.all()
+            for i in favourites:
+                book = Book.objects.filter(category=i)[0]
+                recommended.append(book)
+    context_dict['recommended_books'] = recommended
+    return render(request, 'realm/Recommendations.html', context=context_dict)
     
 
 """ def userauth(request:HttpRequest,user_control_form_slug):
