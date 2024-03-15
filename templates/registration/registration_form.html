@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Registration
+{% endblock %}
+
+{% block body_block %}
     <head>
         <title>Reading Realm - Register</title>
     </head>
@@ -15,4 +21,4 @@
             <input type="submit" value="Register" />
         </form>     
     </body>
-</html>
+{% endblock %}

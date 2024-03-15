@@ -1,6 +1,11 @@
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
 
-<!DOCTYPE html>
-<html>
+{% block title_block %}
+Category
+{% endblock %}
+
+{% block body_block %}
     <head>
         <title>Reading Realm - {{ category.name }} Books</title>
     </head>
@@ -8,8 +13,7 @@
     <body>
         <h1>Reading Realm - {{ category.name }} Books</h1>
         <div>
-            Discover history's stories with our curated selection. Explore different eras and learn about the events that
-        shaped our world. <br />
+            Embark on an Adventure in the {{ category.name }} Section
             <strong>{{ boldmessage }}</strong><br />
         </div>
         <div>
@@ -27,6 +31,6 @@
         </div>
     
     </body>
-</html>
 
 
+{% endblock %}

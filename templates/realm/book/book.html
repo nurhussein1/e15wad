@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Category
+{% endblock %}
+
+{% block body_block %}
     <head>
         <title>{{book.title}}</title>
         <style>
@@ -31,11 +37,21 @@
                     {% endif %} 
                 </blockquote>
             </div>
+            <div>
+                <a href="{% url 'realm:Purchase' %}">
+                <button type="button" autofocus> Purcahse </button> 
+            </a>
+            </div>
+            <div>
+            <a href="{% url 'realm:Rent' %}">
+                <button type="button" autofocus> Rent </button> 
+            </a>
+            </div>
         </main>
-        <footer></footer>
+        <footer>
             <p>Find Out More <a href="{{book.url}}">Here</a></p>
             <p>About the <a href="{{book.author}}">Author</a></p>
             <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
         </footer>
     </body>
-</html>
+{% endblock %}

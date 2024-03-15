@@ -111,7 +111,13 @@ def profilepicture(request):
 
     return render(request, 'realm/account/profilepicture.html')
 
+def purchase(request):
+    context_dict = {'boldmessage': 'this is the Purchase page, '}
+    return render(request, 'realm/purchaseOrRent/purchase.html', context=context_dict)
 
+def rent(request):
+    context_dict = {'boldmessage': 'this is the Rent page, '}
+    return render(request, 'realm/purchaseOrRent/rent.html', context=context_dict)
     
 
 """ def userauth(request:HttpRequest,user_control_form_slug):
