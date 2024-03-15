@@ -6,52 +6,59 @@ Category
 {% endblock %}
 
 {% block body_block %}
-    <head>
-        <title>{{book.title}}</title>
-        <style>
-            a {color: blue;}
-        </style>
-    </head>
-    <body>
-        <header>
-            <h1>{{book.title}}</h1>
 
-        </header>
-        <main>
-            <div>
-                <blockquote>
-                    {% if book.description %}
-                    {{book.description}}
-                    {% else %}
-                    No Description
-                    {% endif %}
+<head>
+    <title>{{book.title}}</title>
+    <style>
+        a {
+            color: blue;
+        }
+    </style>
+</head>
 
-                </blockquote>
-            </div>
-            <div>
-                <blockquote>
-                    {% if book.estimatedreadingtime %}
-                    {{book.estimatedreadingtime}}
-                    {% else %}
-                    No Estimated Reading Time Specified
-                    {% endif %} 
-                </blockquote>
-            </div>
-            <div>
-                <a href="{% url 'realm:Purchase' %}">
-                <button type="button" autofocus> Purcahse </button> 
+<body>
+    <header>
+        <h1>{{book.title}}</h1>
+
+    </header>
+    <main>
+        <div>
+            <blockquote>
+                {% if book.description %}
+                {{book.description}}
+                {% else %}
+                No Description
+                {% endif %}
+
+            </blockquote>
+        </div>
+        <div>
+            <blockquote>
+                {% if book.estimatedreadingtime %}
+                {{book.estimatedreadingtime}}
+                {% else %}
+                No Estimated Reading Time Specified
+                {% endif %}
+            </blockquote>
+        </div>
+        <center>
+            <a href="{% url 'realm:Purchase' %}">
+                <button type="button" style="background-color: rgb(45, 149, 150); color: black; padding: 10px 20px; border: 2px solid #000; border-radius: 5px; margin-right: 10px;">Purchase</button>
             </a>
-            </div>
-            <div>
             <a href="{% url 'realm:Rent' %}">
-                <button type="button" autofocus> Rent </button> 
+                <button type="button" style="background-color: rgb(45, 149, 150); color: black; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">Rent</button>
             </a>
-            </div>
-        </main>
-        <footer>
-            <p>Find Out More <a href="{{book.url}}">Here</a></p>
-            <p>About the <a href="{{book.author}}">Author</a></p>
-            <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
-        </footer>
-    </body>
+        </center>
+        
+
+
+
+
+    </main>
+    <footer>
+        <p>Find Out More <a href="{{book.url}}">Here</a></p>
+        <p>About the <a href="{{book.author}}">Author</a></p>
+        <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
+    </footer>
+</body>
 {% endblock %}

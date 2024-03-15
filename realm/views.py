@@ -119,6 +119,10 @@ def rent(request):
     context_dict = {'boldmessage': 'this is the Rent page, '}
     return render(request, 'realm/purchaseOrRent/rent.html', context=context_dict)
 
+def orderConfirmation(request):
+    context_dict = {'boldmessage': 'this is the Confirmation page, '}
+    return render(request, 'realm/purchaseOrRent/orderConfirmation.html', context=context_dict)
+
 def favourite_category(request):
     category_list = Category.objects.all()
     context_dict={}

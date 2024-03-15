@@ -13,8 +13,10 @@ Purcahse
 </head>
 
 <body>
-
-    <h1>Billing Address</h1>
+    <div>
+        <h1>Billing & Payemnt</h1>
+    </div>
+    <h2>Enter A Billing Address</h2>
 
     <div>
 
@@ -71,7 +73,7 @@ Purcahse
 
     </div>
 
-    <h1>Card Information</h1>
+    <h2>Enter Card Information</h2>
 
     <div>
         <span>Cards Accepted :</span>
@@ -133,6 +135,16 @@ Purcahse
         <span>CVV :</span>
         <input type="text" placeholder="CVV">
     </div>
+
+   
+    <center>
+        <a href="{% url 'realm:OrderConfirmation' %}" style="text-decoration: none; display: inline-block;">
+            <button style="background-color: rgb(45, 149, 150); color: black; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">Confirm Purchase!</button>
+        </a>
+    </center>
+    
+    
+    
 
     </form>
 

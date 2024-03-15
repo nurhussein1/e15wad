@@ -22,7 +22,8 @@ urlpatterns = [
     path('categories/<slug:category_name_slug>/', views.category, name='category',),
     path('book/<slug:book_name_slug>/', views.book, name='book',),
     path('purchase/',views.purchase, name='Purchase'),
-    path('rent/',views.rent, name='Rent')
+    path('rent/',views.rent, name='Rent'),
+    path('orderConfirmation/',views.orderConfirmation, name='OrderConfirmation')
     #path('login/', views.userauth, name='login',kwargs={'user_control_form_slug':'login'}),
     # path('categories/thriller/', views.thriller, name='Thriller'),
     # path('categories/fantasy/', views.fantasy, name='Fantasy'),

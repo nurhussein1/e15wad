@@ -1,0 +1,38 @@
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Order Confirmed
+{% endblock %}
+
+{% block body_block %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <div>
+        <h1>Order Confirmation</h1>
+        <p>Thank you for your order!</p>
+        <p>We're getting your order ready to be shipped. We will notify you when it has been sent.</p>
+        
+        <h2>Order Details</h2>
+        <!-- Insert order details here -->
+        <p>Product Name: {{book.title}}</p>
+        <p>Quantity: 1</p>
+
+        
+        <h2>Shipping Address</h2>
+        <!-- Insert shipping address here -->
+        <p>Jane Doe</p>
+        <p>123 Example St.</p>
+        <p>City, State, 12345</p>
+        
+        <p>If you have any questions or need to make changes to your order, please contact us as soon as possible.</p>
+        
+        <h2>Thank You!</h2>
+        <p>We hope to see you again soon.</p>
+    </div>
+</body>
+{% endblock %}
