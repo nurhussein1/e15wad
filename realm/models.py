@@ -38,8 +38,8 @@ class Book(models.Model):
 
 class UserProfile(models.Model):
     user=models.OneToOneField(User,models.CASCADE,null=True)
-    #email=models.EmailField(null=True)
-    #prefrences = models.TextChoices()
+    favourite_categories = models.ManyToManyField(Category)
+    selected_favourites = models.BooleanField(default=False)
     profilepicture = models.ImageField(upload_to='images/', blank=True)
 
     def __str__(self):

@@ -1,0 +1,23 @@
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Recommendations
+{% endblock %}
+
+
+{% block body_block %}
+    {% if userprofile.selected_favourites %}
+    <h1>Welcome to the reading realm!</h1>
+    <h2>Here are some books we think you'll like to get you started!</h2>
+    <div>
+        <ul>
+            {% for book in recommended_books %}
+                <li><a href="{% url 'realm:book' book.slug%}">{{ book.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>Looks like you haven't selected you're favourite categories yet. <a href="{% url 'realm:FavouriteCategories' %}">Click here</a> to select them</p>
+    {% endif %}
+{% endblock %}

@@ -4,7 +4,7 @@ from realm.models import UserProfile
 
 class RealmRegistrationView(RegistrationView):
     form_class = UserForm
-    success_url = 'home'
+    success_url = 'realm:FavouriteCategories'
     def register(self, form_class):
         new_user = super(RealmRegistrationView, self).register(form_class)
         user_profile = UserProfile()
