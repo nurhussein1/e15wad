@@ -12,12 +12,50 @@ Homepage
     <div class="column">
         <h1>Welcome to The Reading Realm...</h1>
         <hr>
-        <h2>Where Every Page Unveils a New Adventure!</h2><br /><br />
-        Dive into a world of thrilling stories, where imagination knows no bounds. We're thrilled to have you join our
+        <h2>Where Every Page Unveils a New Adventure!</h2>
+        <p>Dive into a world of thrilling stories, where imagination knows no bounds. We're thrilled to have you join our
         community of book lovers. Get ready to embark on this wonderful journey that will captivate your mind and
         ignite your passion for reading. Happy exploring!
         <span style='font-size:20px;'>&#128171;</span>
         <span style='font-size:20px;'>&#128218;</span>
+        </p>
+        
+        <h2>Here are some of day's hottest picks:</h2>
+        
+        <div class="carousel">
+            <div class="slide">
+                <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/scifi_books/Dune.jpg' %}" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/scifi_books/EndersGame.jpg' %}" alt="Slide 3">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/thriller_books/GoneGirl.jpg' %}" alt="Slide 4">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/fantasy_books/HarryPotter.jpg' %}" alt="Slide 5">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/classics_books/PrideAndPrejudice.jpg' %}" alt="Slide 6">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/historical_books/TheBookThief.jpg' %}" alt="Slide 7">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/thriller_books/TheGirlWithTheDragonTattoo.jpg' %}" alt="Slide 8">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/fantasy_books/TheHobbit.jpg' %}" alt="Slide 9">
+            </div>
+            <div class="slide">
+                <img src="{% static 'bookCovers/classics_books/ToKillAMockingbird.jpg' %}" alt="Slide 10">
+            </div>
+            <button class="prev" onclick="prevSlide()">&#10094;</button>
+            <button class="next" onclick="nextSlide()">&#10095;</button>
+        </div>
         <br /><br />
         <strong>{{ boldmessage }}</strong><br />
     </div>
@@ -40,5 +78,46 @@ Homepage
         </ul>
     </div>
 </div>
+<script>
+    // JavaScript code to show/hide slides in the carousel
+    let slideIndex = 0; // Initialize slide index
 
+    // Function to show slides
+    function showSlides() {
+        let slides = document.querySelectorAll('.slide');
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = 'none';
+        }
+        // Show the slide at the current slideIndex
+        slides[slideIndex].style.display = 'block';
+    }
+
+    // Function to navigate to the next slide
+    function nextSlide() {
+        console.log("Next")
+        let slides = document.querySelectorAll('.slide');
+        slideIndex++;
+        // If slideIndex exceeds the number of slides, reset to 0
+        if (slideIndex >= slides.length) {
+            slideIndex = 0;
+        }
+        showSlides();
+    }
+
+    // Function to navigate to the previous slide
+    function prevSlide() {
+        console.log("Prev")
+        let slides = document.querySelectorAll('.slide');
+        slideIndex--;
+        // If slideIndex is less than 0, set it to the last slide index
+        if (slideIndex < 0) {
+            slideIndex = slides.length - 1;
+        }
+        showSlides();
+    }
+
+    // Initial call to showSlides function to display the first slide
+    showSlides();
+</script>
 {% endblock %}
