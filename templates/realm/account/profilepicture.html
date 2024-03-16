@@ -1,11 +1,13 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Change Profile Picture</title>
-</head>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Change Profile Picture
+{% endblock %}
+
+
+{% block body_block %}
 <body>
     <h2>Change Profile Picture</h2>
     <form method="POST" enctype="multipart/form-data">
@@ -16,5 +18,4 @@
     <div>
         <a href="/realm/account">My Account</a><br />
     </div>
-</body>
-</html>
+{% endblock %}

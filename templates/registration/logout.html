@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Reading Realm - Logged out</title>
-    </head>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
 
-    <body>
+{% block title_block %}
+Logout
+{% endblock %}
+
+
+{% block body_block %}
         <h1>Logged Out</h1>
 
         <p>
             You have been successfully logged out. Thanks for using the reading realm!
         </p>
-    </body>
-</html>
+{% endblock %}

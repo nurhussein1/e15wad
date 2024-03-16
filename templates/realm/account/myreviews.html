@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="../realmStylesheet.css">
-        <title>Reading Realm - My Reviews</title>
-    </head>
-    
-    <body>
+{% extends 'realm/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+My Reviews
+{% endblock %}
+
+
+{% block body_block %}
         <h1>Realm Team says...</h1>
         <div>
             hey there partner! <br />
@@ -14,6 +15,4 @@
         <div>
             <a href="/realm/account">My Account</a><br />
         </div>
-    
-    </body>
-</html>
+{% endblock %}

@@ -18,38 +18,44 @@ def populate():
          'description' : "Pride and Prejudice is the second novel by English author Jane Austen, published in 1813. A novel of manners, it follows the character development of Elizabeth Bennet, the protagonist of the book" ,
             'url': 'https://en.wikipedia.org/wiki/Pride_and_Prejudice',
             'estimatedreadingtime': 'Estimated Reading Time: 7 hours',
-            'author': 'https://en.wikipedia.org/wiki/Jane_Austen'},
+            'author': 'https://en.wikipedia.org/wiki/Jane_Austen',
+            'image':'static/bookCovers/classics_books/PrideAndPrejudice.jpg'},
         {'title': 'To Kill a Mockingbird',
          'description' : "To Kill a Mockingbird takes place in the fictional town of Maycomb, Alabama, during the Great Depression. The protagonist is Jean Louise (“Scout”) Finch, an intelligent though unconventional girl who ages from six to nine years old during the course of the novel. She is raised with her brother, Jeremy Atticus" ,
             'url': 'https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird',
          'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
-         'author': 'https://en.wikipedia.org/wiki/Harper_Lee'}
+         'author': 'https://en.wikipedia.org/wiki/Harper_Lee',
+         'image':'static/bookCovers/classics_books/ToKillAMockingbird.jpg'}
     ]
 
     fantasy_books = [
-        {'title': 'The Hobbit',
-         'description' : "In a HOLE in the ground there lived a hobbit.”. Bilbo Baggins lives a quiet, peaceful life in his comfortable hole at Bag End. One day his comfort is shattered by the arrival of Gandalf the Wizard, who persuades Bilbo to set out on an adventure with a group of thirteen" ,
-         'url': 'https://en.wikipedia.org/wiki/The_Hobbit',
-            'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
-            'author': 'https://en.wikipedia.org/wiki/J._R._R._Tolkien'},
         {'title': 'Harry Potter and the Philosophers Stone',
          'description' : "Harry Potter and the Philosopher's Stone is the first installment of the Harry Potter book series by J.K. Rowling12. The story follows the events of Harry Potters first year at Hogwarts, and works as an introduction to the world of magic" ,
             'url': 'https://en.wikipedia.org/wiki/Harry_Potter_and_the_Philosopher%27s_Stone',
          'estimatedreadingtime': 'Estimated Reading Time: 3 hours and 43 minutes',
-         'author': 'https://en.wikipedia.org/wiki/J._K._Rowling'}
+         'author': 'https://en.wikipedia.org/wiki/J._K._Rowling',
+         'image':'static/bookCovers/fantasy_books/HarryPotter.jpg'},
+         {'title': 'The Hobbit',
+         'description' : "In a HOLE in the ground there lived a hobbit.”. Bilbo Baggins lives a quiet, peaceful life in his comfortable hole at Bag End. One day his comfort is shattered by the arrival of Gandalf the Wizard, who persuades Bilbo to set out on an adventure with a group of thirteen" ,
+         'url': 'https://en.wikipedia.org/wiki/The_Hobbit',
+            'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
+            'author': 'https://en.wikipedia.org/wiki/J._R._R._Tolkien',
+            'image':'static/bookCovers/fantasy_books/TheHobbit.jpg'},
     ]
 
     historical_books = [
-        {'title': 'The Book Thief',
-         'description' : "So begins Liesel's love affair with books and words, and soon she is stealing from Nazi book-burnings, the mayor's wife's library . . . wherever there are books to be found." ,
-         'url': 'https://en.wikipedia.org/wiki/The_Book_Thief',
-            'estimatedreadingtime': 'Estimated Reading Time: 10 hours and 8 minutes',
-            'author': 'https://en.wikipedia.org/wiki/Markus_Zusak'},
         {'title': 'All the Light We Cannot See',
          'description' : "Marie-Laure lives in Paris near the Museum of Natural History, where her father works. When she is twelve, the Nazis occupy Paris and father and daughter flee to the walled citadel of Saint-Malo, where Marie-Laure’s reclusive great uncle lives in a tall house by the sea. With them they carry what might be the museum’s most valuable and dangerous jewel." ,
             'url': 'https://en.wikipedia.org/wiki/All_the_Light_We_Cannot_See',
          'estimatedreadingtime': 'Estimated Reading Time: 8 hours and 51 minutes',
-         'author': 'https://en.wikipedia.org/wiki/Anthony_Doerr'}
+         'author': 'https://en.wikipedia.org/wiki/Anthony_Doerr',
+         'image':'static/bookCovers/historical_books/AllTheLightWeCannotSee.jpg'},
+        {'title': 'The Book Thief',
+         'description' : "So begins Liesel's love affair with books and words, and soon she is stealing from Nazi book-burnings, the mayor's wife's library . . . wherever there are books to be found." ,
+         'url': 'https://en.wikipedia.org/wiki/The_Book_Thief',
+            'estimatedreadingtime': 'Estimated Reading Time: 10 hours and 8 minutes',
+            'author': 'https://en.wikipedia.org/wiki/Markus_Zusak',
+        'image':'static/bookCovers/historical_books/TheBookThief.jpg'},
     ]
 
     scifi_books = [
@@ -57,28 +63,32 @@ def populate():
          'description' : "Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a noble family tasked with ruling an inhospitable world where the only thing of value is the “spice” melange, a drug capable of extending life and enhancing consciousness. Coveted across the known universe, melange is a prize worth killing for..." ,
             'url': 'https://en.wikipedia.org/wiki/Dune_(novel)',
          'estimatedreadingtime': 'Estimated Reading Time: 12 hours and 32 minutes',
-         'author': 'https://en.wikipedia.org/wiki/Frank_Herbert'},
+         'author': 'https://en.wikipedia.org/wiki/Frank_Herbert',
+         'image':'static/bookCovers/scifi_books/Dune.jpg'},
         
         {'title': 'Ender’s Game',
          'description' : "Andrew 'Ender' Wiggin thinks he is playing computer simulated war games; he is, in fact, engaged in something far more desperate. The result of genetic experimentation, Ender may be the military genius Earth desperately needs in a war against an alien enemy seeking to destroy all human life. The only way to find out is to throw Ender into ever harsher training, to chip away and find the diamond inside, or destroy him utterly. Ender Wiggin is six years old when it begins." ,
          'url': 'https://en.wikipedia.org/wiki/Ender%27s_Game',
             'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 57 minutes',
-            'author': 'https://en.wikipedia.org/wiki/Orson_Scott_Card'
+            'author': 'https://en.wikipedia.org/wiki/Orson_Scott_Card',
+            'image':'static/bookCovers/scifi_books/EndersGame.jpg'
         }
     ]
 
     thriller_books = [
-        {'title': 'The Girl with the Dragon Tattoo',
-         'description' : "Disgraced crusading journalist Mikael Blomkvist has no idea of the levels of conspiracy he will uncover when is enlisted to investigate the unsolved disappearance nearly forty years ago of a Swedish industrialist’s niece. And when the pierced and tattooed computer savant Lisbeth Salander joins him, together they unearth layers and layers of secrets and scandals that permeate the highest levels of society, from politics to finance to the legal system itself--at the bottom of which lies unimaginable cruelty perpetrated on the weak." ,
-            'url': 'https://en.wikipedia.org/wiki/The_Girl_with_the_Dragon_Tattoo',
-         'estimatedreadingtime': 'Estimated Reading Time:11 hours and 12 minutes',
-         'author': 'https://en.wikipedia.org/wiki/Stieg_Larsson'},
         {'title': 'Gone Girl',
             'description' : "These are the questions Nick Dunne finds himself asking on the morning of his fifth wedding anniversary when his wife Amy suddenly disappears. The police suspect Nick. Amy's friends reveal that she was afraid of him, that she kept secrets from him. He swears it isn't true. A police examination of his computer shows strange searches. " ,
             'url': 'https://en.wikipedia.org/wiki/Gone_Girl_(novel)',
          'estimatedreadingtime': 'Estimated Reading Time: 9 hours and 20 minutes',
-         'author': 'https://en.wikipedia.org/wiki/Gillian_Flynn'
-        }
+         'author': 'https://en.wikipedia.org/wiki/Gillian_Flynn',
+         'image':'static/bookCovers/thriller_books/GoneGirl.jpg'
+        },
+        {'title': 'The Girl with the Dragon Tattoo',
+         'description' : "Disgraced crusading journalist Mikael Blomkvist has no idea of the levels of conspiracy he will uncover when is enlisted to investigate the unsolved disappearance nearly forty years ago of a Swedish industrialist’s niece. And when the pierced and tattooed computer savant Lisbeth Salander joins him, together they unearth layers and layers of secrets and scandals that permeate the highest levels of society, from politics to finance to the legal system itself--at the bottom of which lies unimaginable cruelty perpetrated on the weak." ,
+            'url': 'https://en.wikipedia.org/wiki/The_Girl_with_the_Dragon_Tattoo',
+         'estimatedreadingtime': 'Estimated Reading Time:11 hours and 12 minutes',
+         'author': 'https://en.wikipedia.org/wiki/Stieg_Larsson',
+         'image':'static/bookCovers/thriller_books/TheGirlWithTheDragonTattoo.jpg'},
     ]
 
     cats = {

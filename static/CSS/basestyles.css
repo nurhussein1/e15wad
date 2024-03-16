@@ -14,6 +14,11 @@
     text-align: left;
 } */
 
+h2 {
+    margin-top:7%;
+    margin-bottom:7%;
+}
+
 body {
     background-color: #F1FADA;
     height: 100vh;
@@ -40,6 +45,12 @@ hr {
     border-radius: 5px;
 }
 
+p{
+    font-size: 18px;
+    outline: 3px solid #265073;
+    background-color: #2D9596;
+    padding:5px
+}
 
 
 /* ------------------------------ALL THE NAV BAR STUFF ----------------------------*/
@@ -63,6 +74,7 @@ hr {
     align-items: center;
     background-color: #2D9596;
     padding: 10px 20px;
+    outline: 5px solid #265073;
 }
 
 .logo-container {
@@ -103,6 +115,7 @@ hr {
     /* Distribute available space equally */
     padding: 10px;
     /* Adjust padding as needed */
+    outline: 3.5px solid #265073;
 }
 
 .column h1 {
@@ -114,11 +127,55 @@ hr {
 }
 
 .column h2 {
-    margin-top: 4px;
-    margin-left: 4px;
+    margin-top:4%;
+    margin-bottom:4%;
     color: rgb(0, 0, 0);
     font-family: Helvetica;
     text-align: left;
+}
+
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: auto;
+    outline: 5px solid #265073;
+    background-color: #2D9596;
+    display: flex;
+    justify-content: center; /* Horizontally center the inner div */
+    align-items: center; /* Vertically center the inner div */
+}
+
+.slide {
+    background-color: #2D9596;
+    display: none;
+    width: 100%;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
 }
 
 /* ----------------------------------------ABOUT PAGE STYLING--------------------------------- */
