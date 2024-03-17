@@ -21,10 +21,7 @@ def home(request):
  return render(request, 'realm/home.html', context=context_dict)
 
 def about(request):
-
- # Construct a dictionary to pass to the template
  context_dict = {'boldmessage': 'this is the about page, test that context_dict works'}
- # Return a rendered response to send to the client.
  return render(request, 'realm/about.html', context=context_dict)
 
 def categories(request):
@@ -73,11 +70,22 @@ def book(request, book_name_slug):
     context_dict = {}
     try:
         book = Book.objects.get(slug=book_name_slug)
+        user_has_purchased = False 
+        if request.user.is_authenticated:
+            user_has_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
+        
         context_dict['book'] = book
+        context_dict['user_has_purchased'] = user_has_purchased 
+        
+        # if the user tried to access the read_book page without purchasing, show a message
+        if 'just_tried_to_read' in request.session and request.session['just_tried_to_read']:
+            messages.info(request, 'You must purchase the book to read it.')
+            del request.session['just_tried_to_read']  # remove the flag after showing the message
+        
     except Book.DoesNotExist:
         context_dict['book'] = None
-    return render(request, 'realm/book/book.html', context=context_dict)
 
+    return render(request, 'realm/book/book.html', context_dict)
 
 def webimg(request):
 
@@ -102,8 +110,6 @@ def profilepicture(request):
 
 def purchase(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    
-    # Check if the user has already purchased this book
     if request.user.is_authenticated:
         already_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
         if already_purchased:
@@ -157,7 +163,6 @@ def recommendations(request):
 def confirm_purchase(request, book_id):
     book = get_object_or_404(Book, id=book_id)
     Purchase.objects.create(user=request.user, book=book)
-    # Redirect to a new URL for order confirmation
     return redirect('realm:orderConfirmation', book_id=book.id)
 
 def read_book(request, book_slug):
