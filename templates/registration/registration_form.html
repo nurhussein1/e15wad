@@ -13,7 +13,7 @@ Registration
     <body>
         <h1>Register Here</h1>
 
-        <form method="post" action=".">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             {{ form.as_p }}
