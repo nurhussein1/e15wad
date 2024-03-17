@@ -5,7 +5,7 @@
     {% if purchased_books %}
         <ul>
         {% for purchase in purchased_books %}
-            <li>{{ purchase.book.title }} - Purchased on: {{ purchase.purchase_date }}</li>
+        <li><a href="{% url 'realm:book' purchase.book.slug %}">{{ purchase.book.title }}</a> - Purchased on: {{ purchase.purchase_date }}</li>
         {% endfor %}
         </ul>
     {% else %}

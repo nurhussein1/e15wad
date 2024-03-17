@@ -67,6 +67,7 @@ Category
         <p>Find Out More <a href="{{book.url}}">Here</a></p>
         <p>About the <a href="{{book.author}}">Author</a></p>
         <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
+        <p>Read the book <a href="{% url 'realm:read_book' book.slug %}">Read Book</a></p><br />
     </footer>
 </body>
 {% endblock %}

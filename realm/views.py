@@ -160,3 +160,10 @@ def confirm_purchase(request, book_id):
     Purchase.objects.create(user=request.user, book=book)
     # Redirect to a new URL for order confirmation
     return redirect('realm:orderConfirmation', book_id=book.id)
+
+def read_book(request, book_slug):
+    book = get_object_or_404(Book, slug=book_slug)
+    context = {
+        'book': book
+    }
+    return render(request, 'realm/read_book.html', context)

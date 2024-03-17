@@ -23,4 +23,5 @@ urlpatterns = [
     path('rent/',views.rent, name='Rent'),
     path('orderConfirmation/<int:book_id>/', views.orderConfirmation, name='orderConfirmation'),
     path('confirm_purchase/<int:book_id>/', views.confirm_purchase, name='confirm_purchase'),
+    path('read/<slug:book_slug>/', views.read_book, name='read_book'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
