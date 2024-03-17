@@ -107,7 +107,6 @@ def purchase(request, book_id):
     if request.user.is_authenticated:
         already_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
         if already_purchased:
-            # You can use Django's messaging framework to display a message to the user
             messages.info(request, 'You have already purchased this book.')
             return redirect('realm:book', book_name_slug=book.slug)
             
