@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404
 from .models import Book
+from django.contrib import messages
 
 from os.path import join
 
@@ -100,10 +101,18 @@ def profilepicture(request):
     return render(request, 'realm/account/profilepicture.html')
 
 def purchase(request, book_id):
-    book = get_object_or_404(Book, id=book_id)  # Ensure the book exists
+    book = get_object_or_404(Book, id=book_id)
+    
+    # Check if the user has already purchased this book
+    if request.user.is_authenticated:
+        already_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
+        if already_purchased:
+            # You can use Django's messaging framework to display a message to the user
+            messages.info(request, 'You have already purchased this book.')
+            return redirect('realm:book', book_name_slug=book.slug)
+            
     context_dict = {'boldmessage': 'this is the Purchase page, ', 'book': book}
-    return render(request, 'realm/purchaseOrRent/purchase.html', context=context_dict)
-
+    return render(request, 'realm/purchaseOrRent/purchase.html', context_dict)
 def rent(request):
     context_dict = {'boldmessage': 'this is the Rent page, '}
     return render(request, 'realm/purchaseOrRent/rent.html', context=context_dict)
