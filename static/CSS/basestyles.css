@@ -15,8 +15,8 @@
 } */
 
 h2 {
-    margin-top:7%;
-    margin-bottom:7%;
+    margin-top: 7%;
+    margin-bottom: 7%;
 }
 
 body {
@@ -45,11 +45,11 @@ hr {
     border-radius: 5px;
 }
 
-p{
+p {
     font-size: 18px;
     outline: 3px solid #265073;
     background-color: #2D9596;
-    padding:5px
+    padding: 5px
 }
 
 
@@ -127,8 +127,8 @@ p{
 }
 
 .column h2 {
-    margin-top:4%;
-    margin-bottom:4%;
+    margin-top: 4%;
+    margin-bottom: 4%;
     color: rgb(0, 0, 0);
     font-family: Helvetica;
     text-align: left;
@@ -138,13 +138,16 @@ p{
     position: relative;
     overflow: hidden;
     width: 100%;
-    max-width: 600px; /* Adjust the maximum width as needed */
+    max-width: 600px;
+    /* Adjust the maximum width as needed */
     margin: auto;
     outline: 5px solid #265073;
     background-color: #2D9596;
     display: flex;
-    justify-content: center; /* Horizontally center the inner div */
-    align-items: center; /* Vertically center the inner div */
+    justify-content: center;
+    /* Horizontally center the inner div */
+    align-items: center;
+    /* Vertically center the inner div */
 }
 
 .slide {
@@ -243,6 +246,8 @@ button {
     color: #265073;
 }
 
+
+
 /* ----------------------------------------LOGIN PAGE STYLING--------------------------------- */
 .bookCentre {
     display: flex;
@@ -252,4 +257,126 @@ button {
     /* Center vertically */
     height: 100vh;
     /* Set container height to viewport height */
+}
+
+/* ----------------------------------------POPULAR PAGE STYLING--------------------------------- */
+.container {
+    display: flex;
+    background-color: #F1FADA;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    outline: 3.5px solid #265073;
+}
+
+.column h2 {
+    margin-top: 4%;
+    margin-bottom: 4%;
+    color: rgb(0, 0, 0);
+    font-family: Helvetica;
+    text-align: left;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-info img {
+    width: 350px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.buy-rent-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.buy-link,
+.rent-link {
+    color: #265073;
+    text-decoration: underline;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.buy-link,
+.rent-link {
+    color: #265073;
+    text-decoration: none;
+    margin-right: 5px;
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.buy-link:hover,
+.rent-link:hover {
+    border-color: #265073;
+}
+
+.price {
+    margin-right: 10px;
+    color: #265073;
+    transition: color 0.3s ease-in-out;
+}
+
+.price:hover {
+    color: #2D9596;
+}
+
+.reviews-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+
+.review p.review-content {
+    border: 2px solid #265073;
+    border-radius: 30px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.reviewer-info img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.rating {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.add-review-button-container {
+    position: relative;
+    margin-top: 20px;
+}
+
+.add-review-button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.add-review-button:hover {
+    background-color: #ccc;
 }

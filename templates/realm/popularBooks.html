@@ -2,16 +2,65 @@
 {% load staticfiles %}
 
 {% block title_block %}
-Popular Books
+Popular Book: "All the Light We Cannot See"
 {% endblock %}
 
 {% block body_block %}
-        <div>
-            <h1>Realm Team says...</h1>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
+
+<div class="container">
+    <div class="column">
+        <h2>Today's Popular Book:</h2>
+        <div class="book-info">
+            <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}"
+                alt="All the Light We Cannot See">
         </div>
-        <div>
-            <li><a href="{% url 'home' %}">Home</a></li>
+    </div>
+    <div class="column">
+        <h2>Reviews</h2>
+        <div class="buy-rent-container">
+            <a href="#" class="buy-link">Buy</a><span class="price">$15.99</span>
+            <a href="#" class="rent-link">Rent</a><span class="price">$5.99</span>
         </div>
+        <div class="add-review-button-container">
+            <button class="add-review-button">Add a Review</button>
+        </div>
+        <div class="reviews-container">
+            <div class="review">
+                <div class="reviewer-info">
+                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
+                    <span class="reviewer-name">John Doe</span>
+                </div>
+                <div class="rating">★★★★☆</div>
+                <p class="review-content">Fantastic book! Couldn't put it down until I finished it. Highly recommended.
+                </p>
+            </div>
+
+            <div class="review">
+                <div class="reviewer-info">
+                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
+                    <span class="reviewer-name">Emma Johnson</span>
+                </div>
+                <div class="rating">★★★☆☆</div>
+                <p class="review-content">Enjoyed it overall, but felt it dragged a bit in the middle.</p>
+            </div>
+            <div class="review">
+                <div class="reviewer-info">
+                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
+                    <span class="reviewer-name">Michael Brown</span>
+                </div>
+                <div class="rating">★★★★☆</div>
+                <p class="review-content">Captivating storyline and beautifully written.</p>
+            </div>
+            <div class="review">
+                <div class="reviewer-info">
+                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
+                    <span class="reviewer-name">Sarah Adams</span>
+                </div>
+                <div class="rating">★★★★★</div>
+                <p class="review-content">Absolutely loved it! A must-read for everyone.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
