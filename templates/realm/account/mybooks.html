@@ -5,11 +5,22 @@
     {% if purchased_books %}
         <ul>
         {% for purchase in purchased_books %}
-        <li><a href="{% url 'realm:book' purchase.book.slug %}">{{ purchase.book.title }}</a> - Purchased on: {{ purchase.purchase_date }}</li>
+            <li><a href="{% url 'realm:book' purchase.book.slug %}">{{ purchase.book.title }}</a> - Purchased on: {{ purchase.purchase_date }}</li>
         {% endfor %}
         </ul>
     {% else %}
         <p>You have not purchased any books yet.</p>
+    {% endif %}
+
+    <h2>My Rented Books</h2>
+    {% if rented_books %}
+        <ul>
+        {% for rental in rented_books %}
+            <li><a href="{% url 'realm:book' rental.book.slug %}">{{ rental.book.title }}</a> - Rented on: {{ rental.rental_date }} (expires on {{ rental.rental_end_date }})</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not rented any books yet.</p>
     {% endif %}
 </div>
 {% endblock %}

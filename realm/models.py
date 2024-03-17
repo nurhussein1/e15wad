@@ -1,8 +1,13 @@
 from django.db import models
+from django.utils import timezone
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
+
+def default_rental_end_date():
+    return timezone.now() + datetime.timedelta(weeks=1)
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -52,3 +57,15 @@ class Purchase(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.book.title}"
+
+class Rental(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    rental_date = models.DateTimeField(auto_now_add=True)
+    rental_end_date = models.DateTimeField(default=default_rental_end_date)
+
+    def is_active(self):
+        return self.rental_date + datetime.timedelta(weeks=1) > timezone.now()
+    
+
+

@@ -1,8 +1,8 @@
 {% extends 'realm/base.html' %}
-{% load staticfiles %}
+{% load static %}
 
 {% block title_block %}
-Purchase
+Rent Book
 {% endblock %}
 
 {% block body_block %}
@@ -10,10 +10,13 @@ Purchase
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent: {{ book.title }}</title>
 </head>
 
 <body>
     <div>
+        <h1>Billing & Payment for Renting: {{ book.title }}</h1>
+    </div>
         <h1>Billing & Payemnt</h1>
     </div>
     <h2>Enter A Billing Address</h2>
@@ -138,12 +141,10 @@ Purchase
 
    
     <center>
-        <form method="POST" action="{% url 'realm:confirm_rent' book.id %}">
+        <form method="POST" action="{% url 'realm:confirm_rental' book.id %}">
             {% csrf_token %}
-            <!-- Form fields here -->
-            <button type="submit">Confirm Rent</button>
+            <button type="submit">Confirm Rental</button>
         </form>
-        
     </center>
     
     

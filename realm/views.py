@@ -1,14 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
-from realm.models import Category, Book, Purchase, UserProfile
+from realm.models import Category, Book, Purchase, UserProfile, Rental
 from realm.forms import UserForm
 from django.forms import HiddenInput,Field
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404
-from .models import Book
+from .models import Book, Rental
 from django.contrib import messages
+from django.utils import timezone
+import datetime
 
 from os.path import join
 
@@ -47,9 +49,11 @@ def myreviews(request):
 def mybooks(request):
     if request.user.is_authenticated:
         purchased_books = Purchase.objects.filter(user=request.user).select_related('book')
-        context_dict = {'purchased_books': purchased_books}
-    else:
-        context_dict = {'message': 'You are not logged in.'}
+        rented_books = Rental.objects.filter(user=request.user, rental_end_date__gte=timezone.now()).select_related('book')
+        context_dict = {
+            'purchased_books': purchased_books,
+            'rented_books': rented_books,
+        }
     return render(request, 'realm/account/mybooks.html', context=context_dict)
 
 def category(request,category_name_slug):
@@ -70,18 +74,26 @@ def book(request, book_name_slug):
     context_dict = {}
     try:
         book = Book.objects.get(slug=book_name_slug)
-        user_has_purchased = False 
+        user_has_purchased = False
+        user_has_active_rental = False  # Initialize the flag for active rental
+
         if request.user.is_authenticated:
             user_has_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
-        
+            # Check for active rental
+            user_has_active_rental = Rental.objects.filter(
+                user=request.user, 
+                book=book, 
+                rental_end_date__gte=timezone.now()
+            ).exists()
+
         context_dict['book'] = book
-        context_dict['user_has_purchased'] = user_has_purchased 
+        context_dict['user_has_purchased'] = user_has_purchased
+        context_dict['user_has_active_rental'] = user_has_active_rental
         
-        # if the user tried to access the read_book page without purchasing, show a message
+        # if the user tried to access the read_book page without purchasing or renting, show a message
         if 'just_tried_to_read' in request.session and request.session['just_tried_to_read']:
-            messages.info(request, 'You must purchase the book to read it.')
+            messages.info(request, 'You must purchase or rent the book to read it.')
             del request.session['just_tried_to_read']  # remove the flag after showing the message
-        
     except Book.DoesNotExist:
         context_dict['book'] = None
 
@@ -118,9 +130,25 @@ def purchase(request, book_id):
             
     context_dict = {'boldmessage': 'this is the Purchase page, ', 'book': book}
     return render(request, 'realm/purchaseOrRent/purchase.html', context_dict)
-def rent(request):
-    context_dict = {'boldmessage': 'this is the Rent page, '}
-    return render(request, 'realm/purchaseOrRent/rent.html', context=context_dict)
+
+def rent(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
+            messages.success(request, "You have successfully rented this book for a week.")
+            return redirect('realm:orderConfirmation', book_id=book.id)
+        else:
+            messages.warning(request, "You must be logged in to rent a book.")
+            return redirect('realm:login')
+    else:
+        if request.user.is_authenticated:
+            active_rental = Rental.objects.filter(user=request.user, book=book, rental_end_date__gte=timezone.now()).exists()
+            if active_rental:
+                messages.info(request, "You're currently renting this book.")
+                return redirect('realm:book', book_name_slug=book.slug)
+        context = {'book': book}
+        return render(request, 'realm/purchaseOrRent/rent.html', context)
 
 def orderConfirmation(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -165,9 +193,31 @@ def confirm_purchase(request, book_id):
     Purchase.objects.create(user=request.user, book=book)
     return redirect('realm:orderConfirmation', book_id=book.id)
 
+def confirm_rental(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            rental = Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
+            messages.success(request, "You have successfully rented this book for a week.")
+            return redirect('realm:orderConfirmation', rental.id)
+        else:
+            messages.error(request, "You need to be logged in to rent a book.")
+            return redirect('login')
+    else:
+        return redirect('realm:book', book_name_slug=book.slug)
+
 def read_book(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
-    context = {
-        'book': book
-    }
+    user_has_purchased = False
+    user_has_active_rental = False
+
+    if request.user.is_authenticated:
+        user_has_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
+        user_has_active_rental = Rental.objects.filter(user=request.user, book=book, rental_date__gt=timezone.now()-datetime.timedelta(weeks=1)).exists()
+
+    if not (user_has_purchased or user_has_active_rental):
+        messages.info(request, "You must purchase or rent the book to read it.")
+        return redirect('realm:book', book_name_slug=book.slug)
+
+    context = {'book': book}
     return render(request, 'realm/read_book.html', context)
