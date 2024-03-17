@@ -6,12 +6,6 @@ from django.forms.utils import ErrorList
 from realm.models import Book,Category,UserProfile
 from registration.forms import RegistrationForm
 
-#class ProfilePicForm(forms.ModelForm):
- #   profile_image = forms.ImageField(label="Profile Picture")
-#
-  #  class Meta:
- #           model = UserProfile
-#            fields = ('profile_image', )
 
 class CategoryForm(forms.ModelForm):
     name = forms.CharField(max_length=128,

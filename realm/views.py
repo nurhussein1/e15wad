@@ -21,16 +21,6 @@ def about(request):
  # Return a rendered response to send to the client.
  return render(request, 'realm/about.html', context=context_dict)
 
-""" def register(request):
- 
-    context_dict = {'boldmessage': 'this is the register page, test that context_dict works'}
-    return render(request, 'realm/register.html', context=context_dict)
-
-def login(request):
- 
-    context_dict = {'boldmessage': 'this is the login page, test that context_dict works'}
-    return render(request, 'realm/login.html', context=context_dict) """
-
 def categories(request):
     context_dict = {
         'boldmessage': 'this is the categories page, test that context_dict works',
@@ -86,17 +76,11 @@ def webimg(request):
     return HttpResponse(b"",status=404,reason="Not Found")
 
 def account(request):
-    # Retrieve the profile picture URL
     profile_picture_url = None
     if request.user.is_authenticated:
-
-
-        ##display profile
-        if hasattr(request.user, 'userprofile'):
-            profile_picture = request.user.userprofile.profilepicture
-            if profile_picture:
-                profile_picture_url = profile_picture.url
-
+        profile = getattr(request.user, 'userprofile', None)
+        if profile and profile.profilepicture:
+            profile_picture_url = profile.profilepicture.url
     return render(request, 'realm/account.html', {'profile_picture_url': profile_picture_url})
 
 def profilepicture(request):
@@ -150,30 +134,3 @@ def recommendations(request):
                 recommended.append(book)
     context_dict['recommended_books'] = recommended
     return render(request, 'realm/Recommendations.html', context=context_dict)
-    
-
-""" def userauth(request:HttpRequest,user_control_form_slug):
-    form=UserForm()
-    if(user_control_form_slug!="register"):
-        for i in ("email",):
-            email:Field =form.fields.get(i)
-            email.is_hidden=True
-            email.widget=HiddenInput()
-            email.required=False
-        
-    if(request.method.lower()=="post"):
-        if(user_control_form_slug=="register"):
-            userProfile,created= UserProfile.objects.get_or_create(defaults=request.POST,name=request.POST.get("username"))
-            if(not created):
-                return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
-        elif(user_control_form_slug=="login"):
-            try:
-                userProfile = UserProfile.objects.get(name=request.POST.get("username"))
-            except UserProfile.DoesNotExist:
-                form.add_error("username",f"No User {request.POST.get('username')} found")
-                return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
-
-
-    form.hidden_fields
-    return render(request,template_name=join("realm",f"login.html"),context={'form':form,'ctx':user_control_form_slug},status=200)
-  """
