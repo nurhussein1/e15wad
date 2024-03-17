@@ -10,11 +10,14 @@ Change Profile Picture
 {% block body_block %}
 <body>
     <h2>Change Profile Picture</h2>
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="profilepic">
+        <input type="file" name="profile_pic">
         <button type="submit">Upload</button>
     </form>
+    
+
     <div>
         <a href="/realm/account">My Account</a><br />
     </div>
