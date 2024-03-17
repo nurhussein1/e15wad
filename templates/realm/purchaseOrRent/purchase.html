@@ -138,9 +138,12 @@ Purchase
 
    
     <center>
-        <a href="{% url 'realm:OrderConfirmation' %}" style="text-decoration: none; display: inline-block;">
-            <button style="background-color: rgb(45, 149, 150); color: black; padding: 10px 20px; border: 2px solid #000; border-radius: 5px;">Confirm Purchase!</button>
-        </a>
+        <form method="POST" action="{% url 'realm:confirm_purchase' book.id %}">
+            {% csrf_token %}
+            <!-- Form fields here -->
+            <button type="submit">Confirm Purchase</button>
+        </form>
+        
     </center>
     
     

@@ -1,18 +1,15 @@
 {% extends 'realm/base.html' %}
-{% load staticfiles %}
-
-{% block title_block %}
-My Books
-{% endblock %}
-
-
 {% block body_block %}
-        <h1>Realm Team says...</h1>
-        <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
-        </div>
-        <div>
-            <a href="/realm/account/">My Account</a><br />
-        </div>
+<div>
+    <h2>My Purchased Books</h2>
+    {% if purchased_books %}
+        <ul>
+        {% for purchase in purchased_books %}
+            <li>{{ purchase.book.title }} - Purchased on: {{ purchase.purchase_date }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have not purchased any books yet.</p>
+    {% endif %}
+</div>
 {% endblock %}

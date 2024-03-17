@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
-from realm.models import Category, Book, UserProfile
+from realm.models import Category, Book, Purchase, UserProfile
 from realm.forms import UserForm
 from django.forms import HiddenInput,Field
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.shortcuts import render, get_object_or_404
+from .models import Book
 
 from os.path import join
 
@@ -42,8 +47,11 @@ def myreviews(request):
     return render(request, 'realm/account/myreviews.html', context=context_dict)
 
 def mybooks(request):
- 
-    context_dict = {'boldmessage': 'this is the my books page, test that context_dict works'}
+    if request.user.is_authenticated:
+        purchased_books = Purchase.objects.filter(user=request.user).select_related('book')
+        context_dict = {'purchased_books': purchased_books}
+    else:
+        context_dict = {'message': 'You are not logged in.'}
     return render(request, 'realm/account/mybooks.html', context=context_dict)
 
 def category(request,category_name_slug):
@@ -60,16 +68,15 @@ def category(request,category_name_slug):
     
     return render(request, 'realm/categories/category.html', context=context_dict)
 
-def book(request,book_name_slug):
+def book(request, book_name_slug):
     context_dict = {}
-    
     try:
         book = Book.objects.get(slug=book_name_slug)
         context_dict['book'] = book
     except Book.DoesNotExist:
         context_dict['book'] = None
-    
     return render(request, 'realm/book/book.html', context=context_dict)
+
 
 def webimg(request):
 
@@ -92,17 +99,21 @@ def profilepicture(request):
             profile.save()
     return render(request, 'realm/account/profilepicture.html')
 
-def purchase(request):
-    context_dict = {'boldmessage': 'this is the Purchase page, '}
+def purchase(request, book_id):
+    book = get_object_or_404(Book, id=book_id)  # Ensure the book exists
+    context_dict = {'boldmessage': 'this is the Purchase page, ', 'book': book}
     return render(request, 'realm/purchaseOrRent/purchase.html', context=context_dict)
 
 def rent(request):
     context_dict = {'boldmessage': 'this is the Rent page, '}
     return render(request, 'realm/purchaseOrRent/rent.html', context=context_dict)
 
-def orderConfirmation(request):
-    context_dict = {'boldmessage': 'this is the Confirmation page, '}
-    return render(request, 'realm/purchaseOrRent/orderConfirmation.html', context=context_dict)
+def orderConfirmation(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    context = {
+        'book': book,
+    }
+    return render(request, 'realm/purchaseOrRent/orderConfirmation.html', context)
 
 def favourite_category(request):
     category_list = Category.objects.all()
@@ -134,3 +145,9 @@ def recommendations(request):
                 recommended.append(book)
     context_dict['recommended_books'] = recommended
     return render(request, 'realm/Recommendations.html', context=context_dict)
+
+def confirm_purchase(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    Purchase.objects.create(user=request.user, book=book)
+    # Redirect to a new URL for order confirmation
+    return redirect('realm:orderConfirmation', book_id=book.id)
