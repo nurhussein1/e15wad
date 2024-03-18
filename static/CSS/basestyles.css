@@ -33,6 +33,10 @@ div {
     margin: 10px;
 }
 
+div:not(.navigation) {
+    border-radius: 10px;
+}
+
 hr {
     border: none;
     /* Remove default border */
@@ -51,6 +55,20 @@ p{
     background-color: #2D9596;
     padding:5px
 }
+
+.page-contents {
+    opacity: 1;
+    transition: opacity 1.5s ease; /* Apply transition effect to opacity */
+}
+
+.plain {
+    background-color: #F1FADA;
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    font-family: Trebuchet MS;
+}
+
 
 
 /* ------------------------------ALL THE NAV BAR STUFF ----------------------------*/
@@ -92,7 +110,23 @@ p{
     list-style-type: none;
 }
 
-.navigation img {
+#accountPFP {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+}
+
+#accountPFP img {
+    width: 30px; /* Set the width of the image */
+    height: 30px; /* Set the height of the image */
+    margin: 0 auto; /* Center the image horizontally */
+    display: block; /* Ensure the image is treated as a block element */
+    margin-bottom: 5px; /* Add some space between the image and the link */
+}
+
+
+.navigation .logo {
     width: 4rem;
     margin-right: 1rem;
 }
@@ -102,6 +136,11 @@ p{
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-size: 18px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navigation a:hover {
+    opacity: 0.5; /* Reduce opacity on hover */
 }
 
 /* ----------------------------------------HOME PAGE STYLING------------------------------- */
@@ -252,4 +291,12 @@ button {
     /* Center vertically */
     height: 100vh;
     /* Set container height to viewport height */
+}
+
+
+/* ---------------------------------------Account Page Styling ------------------------------- */
+
+#pfp {
+    width: 200px; /* Set the width to 200 pixels */
+    height: 200px; /* Set the height to 200 pixels */
 }
