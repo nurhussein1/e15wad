@@ -73,7 +73,7 @@ Category
         {% if user_has_purchased or user_has_active_rental %}
             <p>Read the book <a href="{% url 'realm:read_book' book.slug %}">Read Book</a></p><br />
         {% else %}
-            <p>You must purchase the book to read it.</p>
+            <p>You must purchase/rent the book to read it.</p>
         {% endif %}
 
         
