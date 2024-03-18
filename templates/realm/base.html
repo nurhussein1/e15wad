@@ -10,14 +10,20 @@
         {% endblock %}
         </title>
         <link rel="stylesheet" type="text/css" href="{% static 'CSS/basestyles.css' %}">
-    
-        <!-- yoyo this is where the CSS coms in -->
+
+        <style>
+            /* Add or update the following CSS rules */
+            .page-contents {
+                opacity: 0; /* Start with opacity 0 */
+                transition: opacity 1.4s ease; /* Apply transition effect to opacity */
+            }
+        </style>
     </head>
-    <body>
+    <body class="page-contents">
         <!-- the nav bar of the website -->
          <nav class="navigation">
             <div class="logo-container">
-                <img src="{% static 'black_logo.png' %}" alt="Reading Realm Logo">
+                <img class="logo" src="{% static 'black_logo.png' %}" alt="Reading Realm Logo">
                 <a href="{% url 'realm:Home' %}">
                     <h1 id="title">ReadingRealm</h1>
                 </a>
@@ -29,17 +35,64 @@
                 <li><a href="{% url 'realm:About' %}">About</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'auth_logout' %}?next={% url 'home' %}">Logout</a></li>
-                <li><a href="{% url 'realm:Account' %}">My Account</a></li>
+                <li id="accountPFP">
+                    <a href="{% url 'realm:Account' %}"><img id="accountPFP" src="{{ profile_picture_url }}" alt="Profile Picture">
+                        {{ user.username }}</a>
+                </li>
                 {% else %}
                 <li><a href="{% url 'auth_login' %}">Login</a></li>
                 {% endif %}
             </ul>
         </nav>
         <!-- main body of the page -->
+        <div class="plain">
         {% block body_block %}
         {% endblock %}
+        </div>
             <hr />
         <script src="{% static "js/jquery-3.3.1.min.js" %}" crossorigin="anonymous"></script>
         <script src="{% static "js/realm-jquery.js" %}" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const links = document.querySelectorAll('.navigation a');
+                links.forEach(function (link) {
+                    link.addEventListener('click', function (event) {
+                        event.preventDefault(); // Prevent default link behavior
+                        const targetUrl = this.getAttribute('href'); // Get target URL
+                        
+                        // Apply fade-out effect to page contents
+                        document.querySelector('.page-contents').style.opacity = 0;
+                        
+                        // Navigate to the new page after a short delay
+                        setTimeout(function () {
+                            window.location.href = targetUrl;
+                        }, 500); // Adjust the delay time as needed (in milliseconds)
+                    });
+                });
+            });
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fade in the page contents when the DOM is fully loaded
+                fadeInPage();
+            });
+        
+            // Function to fade in the page contents
+            function fadeInPage() {
+                // Set a short delay before starting the fade-in effect
+                setTimeout(function () {
+                    // Apply the fade-in effect by gradually increasing the opacity
+                    document.querySelector('.page-contents').style.transition = 'opacity 0.5s ease';
+                    document.querySelector('.page-contents').style.opacity = 1;
+                }, 100); // Adjust the delay time as needed
+            }
+        
+            // Event listener to trigger the fade-in effect on page navigation
+            window.addEventListener('popstate', function () {
+                // Fade in the page contents whenever the page navigation occurs
+                fadeInPage();
+            });
+        </script>
+        
     </body>
 </html>

@@ -10,7 +10,7 @@ Account
             <br>
                
                 {% if profile_picture_url %}
-                    <img src="{{ profile_picture_url }}" alt="Profile Picture">
+                    <img id="pfp" src="{{ profile_picture_url }}" alt="Profile Picture">
                 {% else %}
                     <p>No profile picture uploaded.</p>
                 {% endif %}

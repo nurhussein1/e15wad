@@ -44,6 +44,20 @@ def popularbooks(request):
     return render(request, 'realm/popularbooks.html', context=context_dict)
 
 
+def get_profile_picture_url(request):
+    profile_picture_url = None
+    if request.user.is_authenticated:
+        profile = getattr(request.user, 'userprofile', None)
+        if profile and profile.profilepicture:
+            profile_picture_url = profile.profilepicture.url
+    return profile_picture_url
+
+def basepfp(request):
+    profile_picture_url = get_profile_picture_url(request)
+    return render(request, 'realm/base.html', {'profile_picture_url': profile_picture_url})
+
+# Other view functions remain unchanged
+
 
 
 def myreviews(request):
