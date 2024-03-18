@@ -34,8 +34,13 @@ def categories(request):
     return render(request, 'realm/categories.html', context=context_dict)
 
 def popularbooks(request):
- 
-    context_dict = {'boldmessage': 'this is the popular books page, test that context_dict works'}
+    
+    context_dict = {}
+  
+    books_list = Book.objects.order_by('-views')[:5]
+    context_dict ['boldmessage'] ='this is the popular books page, test that context_dict works'
+    context_dict['books'] = books_list
+
     return render(request, 'realm/popularbooks.html', context=context_dict)
 
 

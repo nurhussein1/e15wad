@@ -28,6 +28,7 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=128)
     url = models.URLField()
+    views = models.IntegerField(default=0)
     description=models.TextField(null=True)
     slug=models.SlugField(unique=True)
     # bookcover = models.ImageField()
