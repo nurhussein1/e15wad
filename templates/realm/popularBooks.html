@@ -11,6 +11,19 @@ Popular Books
             hey there partner! <br />
             <strong>{{ boldmessage }}</strong><br />
         </div>
+
+        <div>
+            {%if books%}
+            <ul>
+                {% for book in books%}
+                    <li>{{book.title}} ,views: {{book.views}} </li>
+                {% endfor %}
+            </ul>
+            {%else %}
+                <strong>There are no books </strong>
+            {%endif %}
+        </div>
+
         <div>
             <li><a href="{% url 'home' %}">Home</a></li>
         </div>

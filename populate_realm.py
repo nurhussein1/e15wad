@@ -19,13 +19,16 @@ def populate():
             'url': 'https://en.wikipedia.org/wiki/Pride_and_Prejudice',
             'estimatedreadingtime': 'Estimated Reading Time: 7 hours',
             'author': 'https://en.wikipedia.org/wiki/Jane_Austen',
-            'image':'static/bookCovers/classics_books/PrideAndPrejudice.jpg'},
+            'image':'static/bookCovers/classics_books/PrideAndPrejudice.jpg',
+            'views':12},
+
         {'title': 'To Kill a Mockingbird',
          'description' : "To Kill a Mockingbird takes place in the fictional town of Maycomb, Alabama, during the Great Depression. The protagonist is Jean Louise (“Scout”) Finch, an intelligent though unconventional girl who ages from six to nine years old during the course of the novel. She is raised with her brother, Jeremy Atticus" ,
             'url': 'https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird',
          'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
          'author': 'https://en.wikipedia.org/wiki/Harper_Lee',
-         'image':'static/bookCovers/classics_books/ToKillAMockingbird.jpg'}
+         'image':'static/bookCovers/classics_books/ToKillAMockingbird.jpg',
+         'views':122}
     ]
 
     fantasy_books = [
@@ -34,13 +37,16 @@ def populate():
             'url': 'https://en.wikipedia.org/wiki/Harry_Potter_and_the_Philosopher%27s_Stone',
          'estimatedreadingtime': 'Estimated Reading Time: 3 hours and 43 minutes',
          'author': 'https://en.wikipedia.org/wiki/J._K._Rowling',
-         'image':'static/bookCovers/fantasy_books/HarryPotter.jpg'},
+         'image':'static/bookCovers/fantasy_books/HarryPotter.jpg' ,
+         'views':112},
+
          {'title': 'The Hobbit',
          'description' : "In a HOLE in the ground there lived a hobbit.”. Bilbo Baggins lives a quiet, peaceful life in his comfortable hole at Bag End. One day his comfort is shattered by the arrival of Gandalf the Wizard, who persuades Bilbo to set out on an adventure with a group of thirteen" ,
          'url': 'https://en.wikipedia.org/wiki/The_Hobbit',
             'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
             'author': 'https://en.wikipedia.org/wiki/J._R._R._Tolkien',
-            'image':'static/bookCovers/fantasy_books/TheHobbit.jpg'},
+            'image':'static/bookCovers/fantasy_books/TheHobbit.jpg',
+            'views':1321}
     ]
 
     historical_books = [
@@ -49,13 +55,16 @@ def populate():
             'url': 'https://en.wikipedia.org/wiki/All_the_Light_We_Cannot_See',
          'estimatedreadingtime': 'Estimated Reading Time: 8 hours and 51 minutes',
          'author': 'https://en.wikipedia.org/wiki/Anthony_Doerr',
-         'image':'static/bookCovers/historical_books/AllTheLightWeCannotSee.jpg'},
+         'image':'static/bookCovers/historical_books/AllTheLightWeCannotSee.jpg',
+         'views': 131},
+
         {'title': 'The Book Thief',
          'description' : "So begins Liesel's love affair with books and words, and soon she is stealing from Nazi book-burnings, the mayor's wife's library . . . wherever there are books to be found." ,
          'url': 'https://en.wikipedia.org/wiki/The_Book_Thief',
             'estimatedreadingtime': 'Estimated Reading Time: 10 hours and 8 minutes',
             'author': 'https://en.wikipedia.org/wiki/Markus_Zusak',
-        'image':'static/bookCovers/historical_books/TheBookThief.jpg'},
+        'image':'static/bookCovers/historical_books/TheBookThief.jpg',
+        'views':13}
     ]
 
     scifi_books = [
@@ -64,14 +73,16 @@ def populate():
             'url': 'https://en.wikipedia.org/wiki/Dune_(novel)',
          'estimatedreadingtime': 'Estimated Reading Time: 12 hours and 32 minutes',
          'author': 'https://en.wikipedia.org/wiki/Frank_Herbert',
-         'image':'static/bookCovers/scifi_books/Dune.jpg'},
+         'image':'static/bookCovers/scifi_books/Dune.jpg',
+         'views':156},
         
         {'title': 'Ender’s Game',
          'description' : "Andrew 'Ender' Wiggin thinks he is playing computer simulated war games; he is, in fact, engaged in something far more desperate. The result of genetic experimentation, Ender may be the military genius Earth desperately needs in a war against an alien enemy seeking to destroy all human life. The only way to find out is to throw Ender into ever harsher training, to chip away and find the diamond inside, or destroy him utterly. Ender Wiggin is six years old when it begins." ,
          'url': 'https://en.wikipedia.org/wiki/Ender%27s_Game',
             'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 57 minutes',
             'author': 'https://en.wikipedia.org/wiki/Orson_Scott_Card',
-            'image':'static/bookCovers/scifi_books/EndersGame.jpg'
+            'image':'static/bookCovers/scifi_books/EndersGame.jpg',
+            'views':312
         }
     ]
 
@@ -81,14 +92,17 @@ def populate():
             'url': 'https://en.wikipedia.org/wiki/Gone_Girl_(novel)',
          'estimatedreadingtime': 'Estimated Reading Time: 9 hours and 20 minutes',
          'author': 'https://en.wikipedia.org/wiki/Gillian_Flynn',
-         'image':'static/bookCovers/thriller_books/GoneGirl.jpg'
+         'image':'static/bookCovers/thriller_books/GoneGirl.jpg',
+         'views':32
         },
+
         {'title': 'The Girl with the Dragon Tattoo',
          'description' : "Disgraced crusading journalist Mikael Blomkvist has no idea of the levels of conspiracy he will uncover when is enlisted to investigate the unsolved disappearance nearly forty years ago of a Swedish industrialist’s niece. And when the pierced and tattooed computer savant Lisbeth Salander joins him, together they unearth layers and layers of secrets and scandals that permeate the highest levels of society, from politics to finance to the legal system itself--at the bottom of which lies unimaginable cruelty perpetrated on the weak." ,
             'url': 'https://en.wikipedia.org/wiki/The_Girl_with_the_Dragon_Tattoo',
          'estimatedreadingtime': 'Estimated Reading Time:11 hours and 12 minutes',
          'author': 'https://en.wikipedia.org/wiki/Stieg_Larsson',
-         'image':'static/bookCovers/thriller_books/TheGirlWithTheDragonTattoo.jpg'},
+         'image':'static/bookCovers/thriller_books/TheGirlWithTheDragonTattoo.jpg',
+         'views':2}
     ]
 
     cats = {
@@ -109,12 +123,13 @@ def populate():
             print(f'- {c}: {p}')
 
 
-def add_book(cat, title,description, url, author="", estimatedreadingtime=0,  *args, **kwargs,):
+def add_book(cat, title,description, url, author="", estimatedreadingtime=0,views=0,  *args, **kwargs,):
     p = Book.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
     p.estimatedreadingtime = f"{estimatedreadingtime}"
     p.description = f"{description}"
     p.author = author
+    p.views =views
     p.save()
     return p
 
