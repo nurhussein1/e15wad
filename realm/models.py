@@ -74,6 +74,12 @@ class Rental(models.Model):
 
     def is_active(self):
         return self.rental_date + datetime.timedelta(weeks=1) > timezone.now()
-    
 
+class Review(models.Model):
+    book = models.ForeignKey(Book, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f'Review {self.id} by {self.user.username} on {self.book.title}'

@@ -1,22 +1,19 @@
 {% extends 'realm/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-Category
-{% endblock %}
+{% block title_block %}Category{% endblock %}
 
 {% block body_block %}
-
 {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
 {% endif %}
 
 <head>
-    <title>{{book.title}}</title>
+    <title>{{ book.title }}</title>
     <style>
         a {
             color: blue;
@@ -26,24 +23,22 @@ Category
 
 <body>
     <header>
-        <h1>{{book.title}}</h1>
-
+        <h1>{{ book.title }}</h1>
     </header>
     <main>
         <div>
             <blockquote>
                 {% if book.description %}
-                {{book.description}}
+                {{ book.description }}
                 {% else %}
                 No Description
                 {% endif %}
-
             </blockquote>
         </div>
         <div>
             <blockquote>
                 {% if book.estimatedreadingtime %}
-                {{book.estimatedreadingtime}}
+                {{ book.estimatedreadingtime }}
                 {% else %}
                 No Estimated Reading Time Specified
                 {% endif %}
@@ -51,39 +46,53 @@ Category
         </div>
 
         {% if user.is_authenticated %}
-
         <div style="text-align: center; padding: 20px;">
-            <div >
-                <div>
-                    <a href="{% url 'realm:Purchase' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
-                    <a href="{% url 'realm:rent' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
-                </div>
-                <div>
-                <a href="{% url 'realm:add_to_wishlist' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Add to Wishlist</a>
-                </div>
+            <a href="{% url 'realm:Purchase' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
+            <a href="{% url 'realm:rent' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
+            <a href="{% url 'realm:add_to_wishlist' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Add to Wishlist</a>
         </div>
-        
-        
-        
-    
         {% else %}
         <div style="text-align: center;"><p>You must be logged in to make a purchase or rent a book.</p></div>
-    
         {% endif %}
-        </div>
     </main>
     <footer>
-        <p>Find Out More <a href="{{book.url}}">Here</a></p>
-        <p>About the <a href="{{book.author}}">Author</a></p>
-        
+        <p>Find Out More <a href="{{ book.url }}">Here</a></p>
+        <p>About the <a href="{{ book.author }}">Author</a></p>
         <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
         {% if user_has_purchased or user_has_active_rental %}
-            <p>Read the book <a href="{% url 'realm:read_book' book.slug %}">Read Book</a></p><br />
+        <p>Read the book <a href="{% url 'realm:read_book' book.slug %}">Read Book</a></p><br />
         {% else %}
-            <p>You must purchase/rent the book to read it.</p>
+        <p>You must purchase/rent the book to read it.</p>
         {% endif %}
-
-        
     </footer>
+
+    <div>
+        <h2>Reviews</h2>
+        {% for review in reviews %}
+        <div>
+            <strong>{{ review.user.username }}</strong> ({{ review.created_at }}):
+            <p>{{ review.comment }}</p>
+        </div>
+        {% empty %}
+        <p>No reviews yet.</p>
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+        {% if user_has_purchased or user_has_active_rental %}
+        <h2>Add a review</h2>
+        <form method="post" id="reviewForm">
+            {% csrf_token %}
+            {{ review_form.as_p }}
+            <div style="margin-top: 20px; text-align: center;">
+                <a style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none; cursor: pointer;" onclick="document.getElementById('reviewForm').submit();">Submit Review</a>
+            </div>            
+        </form>
+        {% else %}
+            <p>You must purchase or rent the book to be able to add a review.</p>
+        {% endif %}
+    {% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to add a review.</p>
+    {% endif %}
 </body>
 {% endblock %}

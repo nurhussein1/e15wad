@@ -3,7 +3,7 @@ from django import forms
 from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
-from realm.models import Book,Category,UserProfile
+from realm.models import Book,Category, Review,UserProfile
 from registration.forms import RegistrationForm
 
 
@@ -28,3 +28,8 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         exclude = ('category',)
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['comment']

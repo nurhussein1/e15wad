@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
 from realm.models import Category, Book, Purchase, UserProfile, Rental
-from realm.forms import UserForm
+from realm.forms import ReviewForm, UserForm
 from django.forms import HiddenInput,Field
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -100,33 +100,38 @@ def category(request,category_name_slug):
     return render(request, 'realm/categories/category.html', context=context_dict)
 
 def book(request, book_name_slug):
-    context_dict = {}
-    try:
-        book = Book.objects.get(slug=book_name_slug)
-        user_has_purchased = False
-        user_has_active_rental = False  # Initialize the flag for active rental
+    book = get_object_or_404(Book, slug=book_name_slug)
+    user_has_purchased = False
+    user_has_active_rental = False
+    reviews = book.reviews.all()
+    new_review = None
 
-        if request.user.is_authenticated:
-            user_has_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
-            # Check for active rental
-            user_has_active_rental = Rental.objects.filter(
-                user=request.user, 
-                book=book, 
-                rental_end_date__gte=timezone.now()
-            ).exists()
+    if request.user.is_authenticated:
+        user_has_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
+        user_has_active_rental = Rental.objects.filter(user=request.user, book=book, rental_end_date__gte=timezone.now()).exists()
 
-        context_dict['book'] = book
-        context_dict['user_has_purchased'] = user_has_purchased
-        context_dict['user_has_active_rental'] = user_has_active_rental
-        
-        # if the user tried to access the read_book page without purchasing or renting, show a message
-        if 'just_tried_to_read' in request.session and request.session['just_tried_to_read']:
-            messages.info(request, 'You must purchase or rent the book to read it.')
-            del request.session['just_tried_to_read']  # remove the flag after showing the message
-    except Book.DoesNotExist:
-        context_dict['book'] = None
+    # Handle review form submission
+    if request.method == 'POST':
+        review_form = ReviewForm(data=request.POST)
+        if review_form.is_valid() and request.user.is_authenticated:
+            new_review = review_form.save(commit=False)
+            new_review.book = book
+            new_review.user = request.user
+            new_review.save()
+            messages.success(request, "Your review has been added!")
+            return redirect('realm:book', book_name_slug=book.slug)
+    else:
+        review_form = ReviewForm()
 
-    return render(request, 'realm/book/book.html', context_dict)
+    context = {
+        'book': book,
+        'user_has_purchased': user_has_purchased,
+        'user_has_active_rental': user_has_active_rental,
+        'reviews': reviews,
+        'review_form': review_form,
+    }
+
+    return render(request, 'realm/book/book.html', context)
 
 def webimg(request):
 
