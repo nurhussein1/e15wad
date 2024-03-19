@@ -11,15 +11,13 @@ from .models import Book, Rental, Review, Wishlist
 from django.contrib import messages
 from django.utils import timezone
 import datetime
+from django.http import HttpResponseRedirect
 
 from os.path import join
 
-# Create your views here.
 def home(request):
  
- # Construct a dictionary to pass to the template
  context_dict = {'boldmessage': 'test that context_dict works'}
- # Return a rendered response to send to the client.
  return render(request, 'realm/home.html', context=context_dict)
 
 def about(request):
@@ -56,14 +54,18 @@ def basepfp(request):
     profile_picture_url = get_profile_picture_url(request)
     return render(request, 'realm/base.html', {'profile_picture_url': profile_picture_url})
 
-# Other view functions remain unchanged
-
-
-
 def myreviews(request):
- 
-    context_dict = {'boldmessage': 'this is the my reviews page, test that context_dict works'}
-    return render(request, 'realm/account/myreviews.html', context=context_dict)
+    if request.user.is_authenticated:
+        user_reviews = Review.objects.filter(user=request.user).order_by('-created_at')
+        context = {
+            'user_reviews': user_reviews,
+        }
+    else:
+        context = {
+            'user_reviews': [],
+            'message': "You need to log in to see your reviews.",
+        }
+    return render(request, 'realm/account/myreviews.html', context)
 
 def mybooks(request):
     if request.user.is_authenticated:
@@ -110,7 +112,6 @@ def book(request, book_name_slug):
         user_has_purchased = Purchase.objects.filter(user=request.user, book=book).exists()
         user_has_active_rental = Rental.objects.filter(user=request.user, book=book, rental_end_date__gte=timezone.now()).exists()
 
-    # Handle review form submission
     if request.method == 'POST':
         review_form = ReviewForm(data=request.POST)
         if review_form.is_valid() and request.user.is_authenticated:
@@ -123,7 +124,7 @@ def book(request, book_name_slug):
     else:
         review_form = ReviewForm()
 
-    context = {
+    context_dict = {
         'book': book,
         'user_has_purchased': user_has_purchased,
         'user_has_active_rental': user_has_active_rental,
@@ -131,7 +132,7 @@ def book(request, book_name_slug):
         'review_form': review_form,
     }
 
-    return render(request, 'realm/book/book.html', context)
+    return render(request, 'realm/book/book.html', context_dict)
 
 def webimg(request):
 
@@ -198,8 +199,8 @@ def rent(request, book_id):
             if active_rental:
                 messages.info(request, "You're currently renting this book.")
                 return redirect('realm:book', book_name_slug=book.slug)
-        context = {'book': book}
-        return render(request, 'realm/purchaseOrRent/rent.html', context)
+        context_dict = {'book': book}
+        return render(request, 'realm/purchaseOrRent/rent.html', context_dict)
 
 def orderConfirmation(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -274,12 +275,20 @@ def read_book(request, book_slug):
     return render(request, 'realm/read_book.html', context)
 
 def delete_review(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-    if review.user == request.user:
-        book_slug = review.book.slug
-        review.delete()
-        messages.success(request, "Review successfully deleted.")
-        return redirect('realm:book', book_name_slug=book_slug)
+    review = get_object_or_404(Review, pk=review_id)
+    if review.user != request.user:
+        messages.error(request, "You cannot delete someone else's review.")
+        request.session['review_deletion_referrer'] = 'unknown'
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+    review.delete()
+    messages.success(request, "Review deleted successfully.")
+    referrer = request.META.get('HTTP_REFERER', '/')
+    if 'book' in referrer:
+        request.session['review_deletion_referrer'] = 'book'
+    elif 'myreviews' in referrer:
+        request.session['review_deletion_referrer'] = 'myreviews'
     else:
-        messages.error(request, "You do not have permission to delete this review.")
-        return redirect('realm:book', book_name_slug=review.book.slug)
+        request.session['review_deletion_referrer'] = 'unknown'
+    
+    return HttpResponseRedirect(referrer)

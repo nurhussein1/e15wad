@@ -5,14 +5,34 @@
 My Reviews
 {% endblock %}
 
-
 {% block body_block %}
-        <h1>Realm Team says...</h1>
-        <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
-        </div>
-        <div>
-            <a href="/realm/account">My Account</a><br />
-        </div>
+<h1>My Reviews</h1>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %}class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if user_reviews %}
+    {% for review in user_reviews %}
+    <div>
+        <h2>Review for: <a href="{% url 'realm:book' review.book.slug %}">{{ review.book.title }}</a></h2>
+        <p>{{ review.comment }}</p>
+        <p>Posted on: {{ review.created_at|date:"D, d M Y H:i" }}</p>
+        <form action="{% url 'realm:delete_review' review.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete Review" onclick="return confirm('Are you sure you want to delete this review?');">
+        </form>
+    </div>
+    {% endfor %}
+{% else %}
+    <p>{{ message|default:"You have not posted any reviews yet." }}</p>
+{% endif %}
+
+<div>
+    <a href="/realm/account">Back to My Account</a><br />
+</div>
 {% endblock %}
