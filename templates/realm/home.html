@@ -10,7 +10,11 @@ Homepage
 
 <div class="container">
     <div class="column">
+        {% if user.is_authenticated %}
+        <h1>Welcome back, {{ user.username }}! Dive into your next adventure with Reading Realm</h1>
+        {% else %}
         <h1>Welcome to The Reading Realm...</h1>
+        {% endif %}
         <hr>
         <h2>Where Every Page Unveils a New Adventure!</h2>
         <p>Dive into a world of thrilling stories, where imagination knows no bounds. We're thrilled to have you join our

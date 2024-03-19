@@ -1,7 +1,7 @@
 {% extends 'realm/base.html' %}
 {% block body_block %}
 <div>
-    <h2>My Purchased Books</h2>
+    <h2>My Purchased Books:</h2>
     {% if purchased_books %}
         <ul>
         {% for purchase in purchased_books %}
@@ -12,7 +12,7 @@
         <p>You have not purchased any books yet.</p>
     {% endif %}
 
-    <h2>My Rented Books</h2>
+    <h2>My Rented Books:</h2>
     {% if rented_books %}
         <ul>
         {% for rental in rented_books %}
