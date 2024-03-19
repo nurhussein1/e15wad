@@ -20,6 +20,17 @@ My Reviews
     {% for review in user_reviews %}
     <div>
         <h2>Review for: <a href="{% url 'realm:book' review.book.slug %}">{{ review.book.title }}</a></h2>
+        <!-- Label and star ratings -->
+        <div class="rating">
+            <label>Given Rating: </label>
+            {% for star in "12345" %}
+                {% if forloop.counter <= review.rating %}
+                    <span class="filled-star">&#9733;</span>
+                {% else %}
+                    <span class="empty-star">&#9734;</span>
+                {% endif %}
+            {% endfor %}
+        </div>
         <p>{{ review.comment }}</p>
         <p>Posted on: {{ review.created_at|date:"D, d M Y H:i" }}</p>
         <form action="{% url 'realm:delete_review' review.id %}" method="post">
@@ -35,4 +46,20 @@ My Reviews
 <div>
     <a href="/realm/account">Back to My Account</a><br />
 </div>
+
+<style>
+    .filled-star {
+        color: gold;
+        font-size: 24px;
+    }
+    .empty-star {
+        color: lightgray;
+        font-size: 24px;
+    }
+    .rating label {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+</style>
+
 {% endblock %}

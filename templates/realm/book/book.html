@@ -18,6 +18,14 @@
         a {
             color: blue;
         }
+        .star-rating .star {
+            cursor: pointer;
+            font-size: 24px;
+            color: lightgray;
+        }
+        .star-rating .filled {
+            color: gold;
+        }
     </style>
 </head>
 
@@ -69,36 +77,80 @@
     <div>
         <h2>Reviews</h2>
         {% for review in reviews %}
-            <div>
+        <div>
             <strong>{{ review.user.username }}</strong> ({{ review.created_at }}):
             <p>{{ review.comment }}</p>
+            <div class="rating">
+                {% for i in star_range %}
+                    {% if forloop.counter <= review.rating %}
+                        ★
+                    {% else %}
+                        ☆
+                    {% endif %}
+                {% endfor %}
+            </div>
             {% if request.user == review.user %}
             <form action="{% url 'realm:delete_review' review.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
-                <input type="submit" value="Delete" onclick="return confirm('You are deleting your review. Are you sure?');">
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
             </form>
             {% endif %}
-            </div>
+        </div>
         {% empty %}
-            <p>No reviews yet.</p>
+        <p>No reviews yet.</p>
         {% endfor %}
     </div>
 
     {% if user.is_authenticated %}
-        {% if user_has_purchased or user_has_active_rental %}
-        <h2>Add a review</h2>
-        <form method="post" id="reviewForm">
-            {% csrf_token %}
-            {{ review_form.as_p }}
-            <div style="margin-top: 20px; text-align: center;">
-                <a style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none; cursor: pointer;" onclick="document.getElementById('reviewForm').submit();">Submit Review</a>
-            </div>            
-        </form>
-        {% else %}
-            <p>You must purchase or rent the book to be able to add a review.</p>
-        {% endif %}
+    {% if user_has_purchased or user_has_active_rental %}
+    <h2>Add a review</h2>
+    <form method="post" id="reviewForm">
+        {% csrf_token %}
+        
+        <!-- Render the comment field -->
+        {{ review_form.comment }}
+        
+        <!-- Star rating -->
+        <div class="star-rating">
+            {% for value in "12345" %}
+            <input type="radio" name="rating" value="{{ value }}" id="rating-{{ value }}" {% if forloop.first %}checked{% endif %} class="rating-radio" hidden>
+            <label for="rating-{{ value }}" class="star">&#9733;</label>
+            {% endfor %}
+        </div>
+        
+        <!-- Submit button -->
+        <div style="margin-top: 20px; text-align: center;">
+            <a style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none; cursor: pointer;" onclick="document.getElementById('reviewForm').submit();">Submit Review</a>
+        </div>
+    </form>
     {% else %}
-    <a href="{% url 'realm:login' %}">Log in</a> to add a review.</p>
+    <p>You must purchase or rent the book to be able to add a review.</p>
     {% endif %}
+{% else %}
+<p><a href="{% url 'realm:login' %}">Log in</a> to add a review.</p>
+{% endif %}
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.star-rating .star').forEach(function(star, index) {
+            star.addEventListener('click', function() {
+                let allStars = document.querySelectorAll('.star-rating .star');
+                allStars.forEach((star, idx) => {
+                    if (idx <= index) {
+                        star.classList.add('filled');
+                    } else {
+                        star.classList.remove('filled');
+                    }
+                });
+                let radioButtons = document.querySelectorAll('.rating-radio');
+                radioButtons[index].checked = true;
+            });
+        });
+    });
+</script>
 </body>
 {% endblock %}
+
+       

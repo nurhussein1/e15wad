@@ -80,6 +80,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    rating = models.IntegerField(default=5, choices=[(i, str(i)) for i in range(1, 6)])
 
     def __str__(self):
         return f'Review {self.id} by {self.user.username} on {self.book.title}'

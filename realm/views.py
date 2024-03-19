@@ -130,6 +130,7 @@ def book(request, book_name_slug):
         'user_has_active_rental': user_has_active_rental,
         'reviews': reviews,
         'review_form': review_form,
+        'star_range': range(1, 6),
     }
 
     return render(request, 'realm/book/book.html', context_dict)

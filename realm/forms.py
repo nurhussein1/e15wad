@@ -30,6 +30,9 @@ class BookForm(forms.ModelForm):
         exclude = ('category',)
 
 class ReviewForm(forms.ModelForm):
+    rating = forms.ChoiceField(choices=[(x, f"{x} Stars") for x in range(1, 6)], widget=forms.RadioSelect)
+
     class Meta:
         model = Review
-        fields = ['comment']
+        fields = ['comment', 'rating'] 
+
