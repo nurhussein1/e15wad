@@ -53,16 +53,14 @@ Category
         {% if user.is_authenticated %}
 
         <div style="text-align: center; padding: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <form action="{% url 'realm:add_to_wishlist' book.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">
-                        Add to Wishlist
-                    </button>
-                </form>
-                <a href="{% url 'realm:Purchase' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
-                <a href="{% url 'realm:rent' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
-            </div>
+            <div >
+                <div>
+                    <a href="{% url 'realm:Purchase' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
+                    <a href="{% url 'realm:rent' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
+                </div>
+                <div>
+                <a href="{% url 'realm:add_to_wishlist' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Add to Wishlist</a>
+                </div>
         </div>
         
         
