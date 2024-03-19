@@ -69,12 +69,18 @@
     <div>
         <h2>Reviews</h2>
         {% for review in reviews %}
-        <div>
+            <div>
             <strong>{{ review.user.username }}</strong> ({{ review.created_at }}):
             <p>{{ review.comment }}</p>
-        </div>
+            {% if request.user == review.user %}
+            <form action="{% url 'realm:delete_review' review.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="submit" value="Delete" onclick="return confirm('You are deleting your review. Are you sure?');">
+            </form>
+            {% endif %}
+            </div>
         {% empty %}
-        <p>No reviews yet.</p>
+            <p>No reviews yet.</p>
         {% endfor %}
     </div>
 

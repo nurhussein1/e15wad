@@ -27,4 +27,5 @@ urlpatterns = [
     path('read/<slug:book_slug>/', views.read_book, name='read_book'),
     path('confirm_rental/<int:book_id>/', views.confirm_rental, name='confirm_rental'),
     path('add_to_wishlist/<int:book_id>/', views.add_to_wishlist, name='add_to_wishlist'),
+    path('delete_review/<int:review_id>/', views.delete_review, name='delete_review'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

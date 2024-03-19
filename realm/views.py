@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404
-from .models import Book, Rental, Wishlist
+from .models import Book, Rental, Review, Wishlist
 from django.contrib import messages
 from django.utils import timezone
 import datetime
@@ -272,3 +272,14 @@ def read_book(request, book_slug):
 
     context = {'book': book}
     return render(request, 'realm/read_book.html', context)
+
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    if review.user == request.user:
+        book_slug = review.book.slug
+        review.delete()
+        messages.success(request, "Review successfully deleted.")
+        return redirect('realm:book', book_name_slug=book_slug)
+    else:
+        messages.error(request, "You do not have permission to delete this review.")
+        return redirect('realm:book', book_name_slug=review.book.slug)
