@@ -98,7 +98,7 @@
             <p>You must purchase or rent the book to be able to add a review.</p>
         {% endif %}
     {% else %}
-    <p><a href="{% url 'login' %}">Log in</a> to add a review.</p>
+    <a href="{% url 'realm:login' %}">Log in</a> to add a review.</p>
     {% endif %}
 </body>
 {% endblock %}

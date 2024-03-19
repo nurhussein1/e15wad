@@ -1,5 +1,5 @@
 
-from django.urls import path,reverse
+from django.urls import path,reverse, include
 from realm import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -8,6 +8,7 @@ app_name = 'realm'
 
 urlpatterns = [
     path('', views.home, name='Home'),
+    path('accounts/', include('django.contrib.auth.urls')), #to handle users from django-registration-redux==2.2
     path('about/', views.about, name='About'),
     path('categories/', views.categories, name='Categories'),
     path('popularbooks/', views.popularbooks, name='PopularBooks'),
