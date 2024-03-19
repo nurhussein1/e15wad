@@ -11,24 +11,9 @@ Popular Book: "All the Light We Cannot See"
     <div class="column">
         <h2>Today's Popular Book:</h2>
         <div class="book-info">
-            <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}"
-                alt="All the Light We Cannot See">
+            <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}" alt="All the Light We Cannot See">
         </div>
 
-        <div>
-            {%if books%}
-            <ul>
-                {% for book in books%}
-                    <li>{{book.title}} ,views: {{book.views}} </li>
-                {% endfor %}
-            </ul>
-            {%else %}
-                <strong>There are no books </strong>
-            {%endif %}
-        </div>
-
-        <div>
-            <li><a href="{% url 'home' %}">Home</a></li>
     </div>
     <div class="column">
         <h2>Reviews</h2>
