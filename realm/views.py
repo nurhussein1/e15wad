@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404
-from .models import Book, Rental
+from .models import Book, Rental, Wishlist
 from django.contrib import messages
 from django.utils import timezone
 import datetime
@@ -74,6 +74,16 @@ def mybooks(request):
             'rented_books': rented_books,
         }
     return render(request, 'realm/account/mybooks.html', context=context_dict)
+
+def mywishlist(request):
+    if request.user.is_authenticated:
+        context_dict = {}
+        
+        wishlist_items = Wishlist.objects.filter(user=request.user)
+        context_dict['wishlist'] = wishlist_items
+        
+    return render(request, 'realm/account/mywishlist.html', context=context_dict)
+
 
 def category(request,category_name_slug):
     context_dict = {}
@@ -149,6 +159,23 @@ def purchase(request, book_id):
             
     context_dict = {'boldmessage': 'this is the Purchase page, ', 'book': book}
     return render(request, 'realm/purchaseOrRent/purchase.html', context_dict)
+
+def add_to_wishlist(request, book_id):
+    # Get the book object and the current user's profile
+    book = get_object_or_404(Book, id=book_id)
+    if request.user.is_authenticated:
+        # Check if the book is already in the user's wishlist
+        if Wishlist.objects.filter(user=request.user, book=book).exists():
+          # Book is already in the wishlist, you may want to handle this differently
+            messages.info(request, 'This book is currently on your Wishlist.')
+            return redirect('realm:book', book_name_slug=book.slug)
+    
+        # Create a new wishlist item
+        wishlist_item = Wishlist(user=request.user, book=book)
+        wishlist_item.save()
+    return redirect('realm:book', book_name_slug=book.slug)
+
+
 
 def rent(request, book_id):
     book = get_object_or_404(Book, id=book_id)
