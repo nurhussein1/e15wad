@@ -1,0 +1,3 @@
+-=- REQUIREMENTS -=-
+
+2.2 django-registration-redux
