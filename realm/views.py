@@ -226,10 +226,10 @@ def rent(request, book_id):
 
 def orderConfirmation(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    context = {
+    context_dict = {
         'book': book,
     }
-    return render(request, 'realm/purchaseOrRent/orderConfirmation.html', context)
+    return render(request, 'realm/purchaseOrRent/orderConfirmation.html', context_dict)
 
 def favourite_category(request):
     category_list = Category.objects.all()
