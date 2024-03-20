@@ -28,4 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/register/', RealmRegistrationView.as_view(), name = 'registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('popularbooks/', views.popularbooks, name='popularbooks'),
+
  ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -13,54 +13,102 @@ Popular Book: "All the Light We Cannot See"
         <div class="book-info">
             <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}" alt="All the Light We Cannot See">
         </div>
-
     </div>
     <div class="column">
         <h2>Reviews</h2>
         <div class="buy-rent-container">
-            <a href="#" class="buy-link">Purchase</a><span class="price">$15.99</span>
-            <a href="#" class="rent-link">Rent</a><span class="price">$5.99</span>
+            {% if user.is_authenticated %}
+                <a href="{% url 'realm:purchase_book' book.id %}" class="buy-link">Purchase</a><span class="price">$15.99</span>
+                <a href="{% url 'realm:rent_book' book.id %}" class="rent-link">Rent</a><span class="price">$5.99</span>
+            {% else %}
+                <p>You must be logged in to purchase or rent a book.</p>
+            {% endif %}
         </div>
+        {% if user.is_authenticated and not user_has_review %}
         <div class="add-review-button-container">
-            <button class="add-review-button">Add a Review</button>
+            <button class="add-review-button" onclick="toggleReviewForm()">Add a Review</button>
         </div>
-        <div class="reviews-container">
-            <div class="review">
-                <div class="reviewer-info">
-                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
-                    <span class="reviewer-name">John Doe</span>
-                </div>
-                <div class="rating">★★★★☆</div>
-                <p class="review-content">Fantastic book! Couldn't put it down until I finished it. Highly recommended.
-                </p>
-            </div>
+    {% elif user.is_authenticated and user_has_review %}
+    {% else %}
+        <p><a href="{% url 'realm:login' %}">Log in</a> to add a review.</p>
+    {% endif %}
 
+        <div class="reviews-container">
+            {% for review in reviews %}
             <div class="review">
                 <div class="reviewer-info">
                     <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
-                    <span class="reviewer-name">Emma Johnson</span>
+                    <span class="reviewer-name">{{ review.user.username }}</span>
                 </div>
-                <div class="rating">★★★☆☆</div>
-                <p class="review-content">Enjoyed it overall, but felt it dragged a bit in the middle.</p>
-            </div>
-            <div class="review">
-                <div class="reviewer-info">
-                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
-                    <span class="reviewer-name">Michael Brown</span>
+                <div class="rating">
+                    {% for i in star_range %}
+                        {% if forloop.counter <= review.rating %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
                 </div>
-                <div class="rating">★★★★☆</div>
-                <p class="review-content">Captivating storyline and beautifully written.</p>
-            </div>
-            <div class="review">
-                <div class="reviewer-info">
-                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
-                    <span class="reviewer-name">Sarah Adams</span>
+                <p class="review-content">{{ review.comment }}</p>
+                {% if user.is_authenticated and user == review.user %}
+                <div class="delete-review-button-container">
+                    <form method="post" action="{% url 'realm:delete_review' review.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-review-button">Delete Review</button>
+                    </form>
                 </div>
-                <div class="rating">★★★★★</div>
-                <p class="review-content">Absolutely loved it! A must-read for everyone.</p>
+                {% endif %}
             </div>
+            {% empty %}
+            <p>No reviews yet.</p>
+            {% endfor %}
+        </div>
+
+        <div id="review-form-container" style="display: none;">
+            <h2>Add a Review</h2>
+            <form method="post" id="reviewForm">
+                {% csrf_token %}
+                {{ review_form.comment }}
+                <div class="star-rating">
+                    {% for value in "12345" %}
+                    <input type="radio" name="rating" value="{{ value }}" id="rating-{{ value }}" {% if forloop.first %}checked{% endif %} class="rating-radio" hidden>
+                    <label for="rating-{{ value }}" class="star">&#9733;</label>
+                    {% endfor %}
+                </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none; cursor: pointer;" onclick="document.getElementById('reviewForm').submit();">Submit Review</a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<script>
+    function toggleReviewForm() {
+        var reviewFormContainer = document.getElementById("review-form-container");
+        if (reviewFormContainer.style.display === "none") {
+            reviewFormContainer.style.display = "block";
+        } else {
+            reviewFormContainer.style.display = "none";
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.star-rating .star').forEach(function(star, index) {
+            star.addEventListener('click', function() {
+                let allStars = document.querySelectorAll('.star-rating .star');
+                allStars.forEach((star, idx) => {
+                    if (idx <= index) {
+                        star.classList.add('filled');
+                    } else {
+                        star.classList.remove('filled');
+                    }
+                });
+                let radioButtons = document.querySelectorAll('.rating-radio');
+                radioButtons[index].checked = true;
+            });
+        });
+    });
+</script>
 
 {% endblock %}

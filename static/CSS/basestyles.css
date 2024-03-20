@@ -420,9 +420,20 @@ button {
     color: #000;
     border: 1px solid #ccc;
     padding: 8px 16px;
+    margin-bottom: 100px;
     cursor: pointer;
 }
 
-.add-review-button:hover {
+.add-review-button:hover,
+.delete-review-button:hover {
     background-color: #ccc;
+}
+.delete-review-button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    align-self: flex-end;
+    padding: 8px 16px;
+    margin-left: 650px;
 }

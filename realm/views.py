@@ -32,14 +32,34 @@ def categories(request):
     return render(request, 'realm/categories.html', context=context_dict)
 
 def popularbooks(request):
-    
     context_dict = {}
-  
-    books_list = Book.objects.order_by('-views')[:5]
-    context_dict ['boldmessage'] ='this is the popular books page, test that context_dict works'
-    context_dict['books'] = books_list
+    
+    popular_book = Book.objects.filter(title="All the Light We Cannot See").first()
+    
+    reviews = popular_book.reviews.all()
+    new_review = None
+    
+    user_has_review = reviews.filter(user=request.user).exists() if request.user.is_authenticated else False
 
-    return render(request, 'realm/popularbooks.html', context=context_dict)
+    if request.method == 'POST':
+        if not user_has_review:
+            review_form = ReviewForm(data=request.POST)
+            if review_form.is_valid():
+                new_review = review_form.save(commit=False)
+                new_review.book = popular_book
+                new_review.user = request.user
+                new_review.save()
+                return redirect('popularbooks')
+    else:
+        review_form = ReviewForm()
+    
+    context_dict['book'] = popular_book
+    context_dict['reviews'] = reviews
+    context_dict['review_form'] = review_form
+    context_dict['star_range'] = range(1, 6)
+    context_dict['user_has_review'] = user_has_review
+    
+    return render(request, 'realm/popularbooks.html', context_dict)
 
 
 def get_profile_picture_url(request):
@@ -134,6 +154,7 @@ def book(request, book_name_slug):
     }
 
     return render(request, 'realm/book/book.html', context_dict)
+
 
 def webimg(request):
 
@@ -243,22 +264,25 @@ def recommendations(request):
 
 def confirm_purchase(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    Purchase.objects.create(user=request.user, book=book)
-    return redirect('realm:orderConfirmation', book_id=book.id)
+    if request.user.is_authenticated:
+        Purchase.objects.create(user=request.user, book=book)
+        messages.success(request, "Book purchased successfully!")
+        return redirect('realm:PopularBooks')  # Update the redirect to point to the correct URL name
+    else:
+        messages.error(request, "You must be logged in to purchase a book.")
+        return redirect('realm:login')
 
 def confirm_rental(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    if request.method == "POST":
-        if request.user.is_authenticated:
-            rental = Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
-            messages.success(request, "You have successfully rented this book for a week.")
-            return redirect('realm:orderConfirmation', rental.id)
-        else:
-            messages.error(request, "You need to be logged in to rent a book.")
-            return redirect('login')
+    if request.user.is_authenticated:
+        Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
+        messages.success(request, "Book rented successfully for one week!")
+        return redirect('realm:PopularBooks')  # Update the redirect to point to the correct URL name
     else:
-        return redirect('realm:book', book_name_slug=book.slug)
-
+        messages.error(request, "You must be logged in to rent a book.")
+        return redirect('realm:login')
+    
+    
 def read_book(request, book_slug):
     book = get_object_or_404(Book, slug=book_slug)
     user_has_purchased = False
@@ -277,13 +301,14 @@ def read_book(request, book_slug):
 
 def delete_review(request, review_id):
     review = get_object_or_404(Review, pk=review_id)
+    
     if review.user != request.user:
         messages.error(request, "You cannot delete someone else's review.")
-        request.session['review_deletion_referrer'] = 'unknown'
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
-
+    
     review.delete()
     messages.success(request, "Review deleted successfully.")
+    
     referrer = request.META.get('HTTP_REFERER', '/')
     if 'book' in referrer:
         request.session['review_deletion_referrer'] = 'book'
