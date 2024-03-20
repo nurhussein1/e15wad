@@ -55,8 +55,8 @@
 
         {% if user.is_authenticated %}
         <div style="text-align: center; padding: 20px;">
-            <a href="{% url 'realm:Purchase' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
-            <a href="{% url 'realm:rent' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
+            <a href="{% url 'realm:purchase_book' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
+            <a href="{% url 'realm:rent_book' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
             <a href="{% url 'realm:add_to_wishlist' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Add to Wishlist</a>
         </div>
         {% else %}

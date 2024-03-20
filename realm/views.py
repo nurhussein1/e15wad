@@ -264,23 +264,20 @@ def recommendations(request):
 
 def confirm_purchase(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    if request.user.is_authenticated:
-        Purchase.objects.create(user=request.user, book=book)
-        messages.success(request, "Book purchased successfully!")
-        return redirect('realm:PopularBooks')  # Update the redirect to point to the correct URL name
-    else:
-        messages.error(request, "You must be logged in to purchase a book.")
-        return redirect('realm:login')
-
+    Purchase.objects.create(user=request.user, book=book)
+    return redirect('realm:orderConfirmation', book_id=book.id)
 def confirm_rental(request, book_id):
     book = get_object_or_404(Book, id=book_id)
-    if request.user.is_authenticated:
-        Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
-        messages.success(request, "Book rented successfully for one week!")
-        return redirect('realm:PopularBooks')  # Update the redirect to point to the correct URL name
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            rental = Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
+            messages.success(request, "You have successfully rented this book for a week.")
+            return redirect('realm:orderConfirmation', rental.id)
+        else:
+            messages.error(request, "You need to be logged in to rent a book.")
+            return redirect('login')
     else:
-        messages.error(request, "You must be logged in to rent a book.")
-        return redirect('realm:login')
+        return redirect('realm:book', book_name_slug=book.slug)
     
     
 def read_book(request, book_slug):
