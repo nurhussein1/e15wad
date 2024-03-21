@@ -4,21 +4,29 @@
 {% block title_block %}
 Registration
 {% endblock %}
-
 {% block body_block %}
-    <head>
-        <title>Reading Realm - Register</title>
-    </head>
-
-    <body>
-        <h1>Register Here</h1>
-
+<div class="container">
+    <div class="column">
+        <h1>Join Reading Realm</h1><br>
+        <h3>Register below to explore countless books!</h3><br>
+        <br>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
             {{ form.as_p }}
-            
             <input type="submit" value="Register" />
-        </form>     
-    </body>
+            <br>
+        </form>
+        <br>
+        <p>
+        Already have an account?
+        <a href="{% url 'auth_login' %}">Log in here!</a>
+        </p>
+    </div>
+    <div class="column">
+        <div class="bookCentre">
+            <img src="{% static 'books.png' %}" width="400" height="300">
+        </div>
+    </div>
+</div>
 {% endblock %}
+
