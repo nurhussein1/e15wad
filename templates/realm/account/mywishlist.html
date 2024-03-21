@@ -5,7 +5,7 @@
     {% if wishlist %}
         <ul>
         {% for book in wishlist %}
-            <li><a href="{% url 'realm:book' book.book.slug}">{{ book.book.title }}</a> </li>
+            <li><a href="{% url 'realm:book' book.book.slug %}">{{ book.book.title }}</a> </li>
         {% endfor %}
         </ul>
     {% else %}
