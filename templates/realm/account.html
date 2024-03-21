@@ -6,29 +6,24 @@ Account
 {% endblock %}
 
 {% block body_block %}
-        <h1>Realm Team says...</h1>
-            <br>
-               
-                {% if profile_picture_url %}
-                    <img id="pfp" src="{{ profile_picture_url }}" alt="Profile Picture">
-                {% else %}
-                    <p>No profile picture uploaded.</p>
-                {% endif %}
-            <br/>
-
-        <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
-            <li><a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a><br /></li>
-            <li><a href="{% url 'realm:MyReviews' %}">My Reviews</a><br /></li>
-            <li><a href="{% url 'realm:MyWishList' %}">My Wishlist</a><br /></li>
-            <li><a href="{% url 'realm:MyBooks' %}">My Books</a><br /></li>
-
+    <div class="outline">
+        <div class="profileContainer">
+            {% if profile_picture_url %}
+                <img id="pfp" src="{{ profile_picture_url }}" alt="Profile Picture">
+            {% else %}
+                <p>No profile picture uploaded.</p>
+            {% endif %}
+            <h1>Welcome to your profile, {{ user.username }}</h1>
         </div>
-        <div>
-        	<a href="{% url 'home' %}">Home</a>
-        </div>
-    
-    </body>
-</html>
+        <hr />
+        <div class="user-options">
+            <strong>{{ boldmessage }}</strong><br>
+            <ul>
+                <li><a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a></li>
+                <li><a href="{% url 'realm:MyReviews' %}">My Reviews</a></li>
+                <li><a href="{% url 'realm:MyWishList' %}">My Wishlist</a></li>
+                <li><a href="{% url 'realm:MyBooks' %}">My Books</a></li>
+            </ul>
+        </div>        
+    </div>
 {% endblock %}

@@ -6,20 +6,45 @@ Categories
 {% endblock %}
 
 {% block body_block %}
-    <div>
-        <h1>Realm Team says...</h1>
-        Explore our selection and find the category that perfectly matches your interests and preferences.
-        <span style='font-size:10px;'>&#127775;</span> <br />
-        <strong>{{ boldmessage }}</strong><br />
-    </div>
-    <div>
-        <a href="{% url 'realm:Home' %}">Home</a>
-    </div>
-    <div>
-        <ul>
-            {% for category in categories %}
-            <li><a href="{% url 'realm:category' category.slug %}">{{category.name}}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+<div class="outline">
+    <h1>Realm Team says...</h1>
+    <hr />
+    Explore our selection and find the category that perfectly matches your interests and preferences.
+    <span style='font-size:10px;'>&#127775;</span> <br />
+    <!-- <strong>{{ boldmessage }}</strong> -->
+    <br />
+</div>
+
+<div class="tab">
+    {% for category in categories %}
+    <button class="tablinks {% if forloop.first %}active{% endif %}" onclick="openCategory(event, '{{ category.slug }}')">{{ category.name }}</button>
+    {% endfor %}
+</div>
+
+{% for category in categories %}
+<div id="{{ category.slug }}" class="tabcontent">
+    <h2>{{ category.name }}</h2>
+    <p>{{ category.description }}</p>
+    <a class="catLink" href="{% url 'realm:category' category.slug %}">Click to explore more {{category.name}}</a>
+</div>
+{% endfor %}
+
+<script>
+    function openCategory(evt, categoryName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(categoryName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementsByClassName("tablinks")[0].click();
+</script>
 {% endblock %}

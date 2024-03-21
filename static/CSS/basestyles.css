@@ -17,6 +17,13 @@
 h2 {
     margin-top: 7%;
     margin-bottom: 7%;
+    color: #0870a1;
+}
+
+h3 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: #265073;
 }
 
 body {
@@ -67,6 +74,11 @@ p {
     width: 100%;
     overflow-y: auto;
     font-family: Trebuchet MS;
+}
+
+div .outline{
+    outline: 5px solid #265073;
+    margin-bottom: 20px;
 }
 
 
@@ -168,7 +180,7 @@ p {
 .column h2 {
     margin-top: 4%;
     margin-bottom: 4%;
-    color: rgb(0, 0, 0);
+    color: #0870a1;
     font-family: Helvetica;
     text-align: left;
 }
@@ -200,7 +212,7 @@ img {
     height: auto;
 }
 
-button {
+.carousel button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -304,7 +316,57 @@ button {
 #pfp {
     width: 200px; /* Set the width to 200 pixels */
     height: 200px; /* Set the height to 200 pixels */
+    margin-right: 5%;
 }
+
+.profileContainer {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    width: fit-content; /* Adjust width to fit content */
+}
+
+.user-options {
+    font-family: Arial, sans-serif;
+    background-color: #9AD0C2;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.user-options strong {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.user-options ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.user-options li {
+    display: inline-block;
+    margin-right: 10px; /* Adjust spacing between tabs */
+}
+
+.user-options a {
+    text-decoration: none;
+    color: #0870a1;
+    padding: 8px 12px;
+    border: 1px solid #0870a1;
+    border-radius: 5px;
+}
+
+.user-options a:hover {
+    background-color: #0870a1;
+    color: #fff;
+}
+
+.user-options a:focus {
+    outline: none;
+}
+
+
+
 /* ----------------------------------------POPULAR PAGE STYLING--------------------------------- */
 .container {
     display: flex;
@@ -339,6 +401,7 @@ button {
 
 .buy-rent-container {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -358,14 +421,17 @@ button {
     margin-right: 5px;
     cursor: pointer;
     padding: 8px 12px;
-    border: 2px solid transparent;
+    border: 2px solid;
+    border-color: #265073;
+    background-color: #67b4b6;
     border-radius: 5px;
-    transition: border-color 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+    flex:1;
 }
 
 .buy-link:hover,
 .rent-link:hover {
-    border-color: #265073;
+    opacity: 0.7;
 }
 
 .price {
@@ -416,24 +482,108 @@ button {
 }
 
 .add-review-button {
-    background-color: #fff;
+    background-color: #2D9596;
     color: #000;
-    border: 1px solid #ccc;
+    border: 2px solid #265073;
     padding: 8px 16px;
     margin-bottom: 100px;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Add transition effect for smoother hover */
 }
 
 .add-review-button:hover,
 .delete-review-button:hover {
-    background-color: #ccc;
+    background-color: #0870a1; /* Change background color on hover */
 }
+
 .delete-review-button {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #ccc;
+    background-color: #265073; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove button border */
+    padding: 8px 16px; /* Add padding to the button */
+    margin-top:10px;
     cursor: pointer;
-    align-self: flex-end;
-    padding: 8px 16px;
-    margin-left: 650px;
+    border-radius: 5px; /* Add border radius for rounded corners */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Add transition effect for smoother hover */
+}
+
+.delete-review-button-container {
+    position: relative; /* Change position to relative */
+    margin-top: 20px; /* Add margin-top for spacing */
+}
+
+/* ----------------------------------------------- CATEGORIES PAGE -------------------------------------------------------- */
+.tab {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    outline: 5px solid #265073;
+    margin-bottom: 20px;
+}
+
+.tab button {
+    background-color: inherit;
+    color: black;
+    padding: 14px 20px;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; /* Prevent button text from wrapping */
+    margin-left:5px
+}
+
+.tab button.active {
+    background-color: #2D9596;
+    outline: 3px solid #265073;
+
+}
+
+.tabcontent{
+    outline: 5px solid #265073;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tabcontent p{
+    margin-bottom:20px;
+}
+
+.tabcontent h2{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: #0870a1;
+}
+
+.catLink {
+    display: block; /* Make the link behave like a block element */
+    margin: 0 auto; /* Center the block element horizontally */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #2D9596; /* Your site's primary color */
+    color: #fff; /* Text color */
+    text-decoration: none; /* Remove underline */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    outline: 3px solid #265073;
+}
+
+.catLink:hover {
+    background-color: #0870a1; /* Darker shade of primary color on hover */
+}
+
+/* ----------------------------------------------------- ACCOUNT PAGE ---------------------------------------------------------------- */
+
+.profileContainer {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    width: fit-content; /* Adjust width to fit content */
+}
+.profileContainer h1 {
+    margin-left: 30px; /* Remove default margin */
 }
