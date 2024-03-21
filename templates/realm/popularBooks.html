@@ -11,11 +11,14 @@ Popular Book: "All the Light We Cannot See"
     <div class="column">
         <h2>Today's Popular Book:</h2>
         <div class="book-info">
-            <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}" alt="All the Light We Cannot See">
+            <div class="carousel">
+                <img src="{% static 'bookCovers/historical_books/AllTheLightWeCannotSee.jpg' %}" alt="All the Light We Cannot See">
+            </div>
         </div>
     </div>
     <div class="column">
         <h2>Reviews</h2>
+        <hr />
         <div class="buy-rent-container">
             {% if user.is_authenticated %}
                 <a href="{% url 'realm:purchase_book' book.id %}" class="buy-link">Purchase</a><span class="price">$15.99</span>
@@ -23,7 +26,9 @@ Popular Book: "All the Light We Cannot See"
             {% else %}
                 <p>You must be logged in to purchase or rent a book.</p>
             {% endif %}
+            
         </div>
+        <hr />
         {% if user.is_authenticated and not user_has_review %}
         <div class="add-review-button-container">
             <button class="add-review-button" onclick="toggleReviewForm()">Add a Review</button>

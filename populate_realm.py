@@ -106,17 +106,18 @@ def populate():
     ]
 
     cats = {
-        'Classics': {'books': classics_books},
-        'Fantasy': {'books': fantasy_books},
-        'Historical': {'books': historical_books},
-        'SciFi': {'books': scifi_books},
-        'Thriller': {'books': thriller_books}
+        'Classics': {'description': 'Classics books represent a timeless treasure trove of literature, capturing the essence of different eras and cultures while transcending the limitations of time and space. These works are revered for their profound insights into the human condition, intricate character development, and enduring themes that resonate across generations. From the eloquent prose of Jane Austens "Pride and Prejudice," which explores the complexities of societal norms and romantic relationships in Regency-era England, to Harper Lees "To Kill a Mockingbird," a poignant portrayal of racial injustice and moral growth in the American South during the 1930s, classics books transport readers to worlds both familiar and fantastical, inviting introspection and fostering empathy. Whether delving into the depths of existential dilemmas, grappling with ethical quandaries, or celebrating the triumph of the human spirit, classics books continue to inspire, enlighten, and enrich readers of all ages, leaving an indelible mark on literary history.','books': classics_books},
+        'Fantasy': {'description': 'Fantasy books transport readers to enchanting realms where magic and adventure intertwine, captivating imaginations with tales of epic quests, mythical creatures, and heroic protagonists. Within the pages of fantasy literature, readers embark on extraordinary journeys through mystical lands, encountering wizards, dragons, elves, and other fantastical beings. These narratives often explore themes of good versus evil, the power of friendship and bravery, and the triumph of the human spirit against insurmountable odds. From the iconic wizardry of J.K. Rowlings "Harry Potter" series to the timeless allure of J.R.R. Tolkiens Middle-earth in "The Hobbit" and "The Lord of the Rings," fantasy books offer an escape into richly imagined worlds brimming with wonder, danger, and the promise of adventure at every turn. Whether delving into classic tales or discovering new realms crafted by contemporary authors, fantasy literature continues to captivate readers of all ages with its boundless creativity and enduring magic.','books': fantasy_books},
+        'Historical': {'description': 'Historical books offer readers a captivating journey through the annals of time, immersing them in rich narratives that unfold against the backdrop of real-world events and settings from the past. These books serve as windows into bygone eras, shedding light on the triumphs, trials, and tribulations of humanity throughout history. Whether delving into the intricacies of ancient civilizations, exploring pivotal moments in world wars, or unraveling the complexities of cultural movements, historical books provide not only entertainment but also invaluable insights into the shaping of our modern world. Through meticulous research and vivid storytelling, authors of historical literature breathe life into characters and events from yesteryears, offering readers the opportunity to learn, reflect, and connect with the enduring legacies of the past.','books': historical_books},
+        'SciFi': {'description': 'Science fiction, often abbreviated as scifi, encompasses a vast and imaginative realm of literature that explores speculative concepts rooted in scientific principles, futuristic technologies, and otherworldly settings. Within the scifi genre, readers embark on thrilling journeys across distant galaxies, encounter advanced civilizations, and grapple with the ethical dilemmas posed by artificial intelligence and space exploration. From epic space operas to mind-bending dystopian futures, scifi books captivate audiences with their visionary storytelling and thought-provoking narratives. These books challenge our perceptions of reality, pushing the boundaries of human imagination while offering compelling insights into the possibilities and pitfalls of our ever-evolving relationship with technology and the cosmos.','books': scifi_books},
+        'Thriller': {'description': 'Thriller books captivate readers with their gripping narratives, intense suspense, and unexpected plot twists, keeping them on the edge of their seats from start to finish. In the realm of thrillers, readers delve into intricate webs of deception, unraveling dark secrets, and navigating through the minds of complex characters. These books often explore themes of mystery, crime, and psychological tension, drawing readers into heart-pounding scenarios where danger lurks around every corner. Whether its a psychological thriller that delves into the depths of the human psyche or a fast-paced action thriller filled with adrenaline-pumping sequences, thriller books offer an exhilarating reading experience that leaves readers eagerly turning pages to uncover the truth behind each thrilling mystery.','books': thriller_books}
     }
 
     for cat, cat_data in cats.items():
-        c = add_cat(cat)
+        c = add_cat(cat, cat_data['description'])
         for p in cat_data['books']:
             add_book(c, **p)
+
 
     for c in Category.objects.all():
         for p in Book.objects.filter(category=c):
@@ -134,11 +135,13 @@ def add_book(cat, title,description, url, author="", estimatedreadingtime=0,view
     return p
 
 
-def add_cat(name):
-    c, created = Category.objects.get_or_create(name=name)
-    if created:
+def add_cat(name, description):
+    c, created = Category.objects.get_or_create(name=name, defaults={'description': description})
+    if not created:
+        c.description = description
         c.save()
     return c
+
 
 
 if __name__ == '__main__':
