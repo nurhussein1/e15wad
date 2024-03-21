@@ -587,3 +587,25 @@ img {
 .profileContainer h1 {
     margin-left: 30px; /* Remove default margin */
 }
+
+/* ----------------------------------------------------- FOOTER ---------------------------------------------------------------- */
+.footer-content {
+    text-align: center;
+}
+.email-dialog {
+    display: none;
+    position: relative;
+    background-color: #2D9596;
+    color: #fff;
+    padding: 2px 3px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.email-dialog.show {
+    display: inline-block;
+    opacity: 1;
+}

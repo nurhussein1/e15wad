@@ -48,8 +48,14 @@
         <div class="plain">
         {% block body_block %}
         {% endblock %}
+        
         </div>
             <hr />
+
+            <div class="footer-content">
+                <p>&copy; 2024 Reading Realm. All rights reserved. For any enquires please contact us: <a href="#" id="emailLink">readingrealm@help.com</a><span class="email-dialog">Email copied!</span></p>
+            </div>
+    
         <script src="{% static "js/jquery-3.3.1.min.js" %}" crossorigin="anonymous"></script>
         <script src="{% static "js/realm-jquery.js" %}" crossorigin="anonymous"></script>
         <script>
@@ -93,6 +99,28 @@
                 fadeInPage();
             });
         </script>
-        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const emailLink = document.getElementById('emailLink');
+                const emailAddress = 'readingrealm@help.com';
+                const emailDialog = document.querySelector('.email-dialog');
+
+                emailLink.addEventListener('click', function (event) {
+                    event.preventDefault(); 
+
+                    navigator.clipboard.writeText(emailAddress)
+                        .then(() => {
+                            emailDialog.classList.add('show'); 
+
+                            setTimeout(function () {
+                                emailDialog.classList.remove('show');
+                            }, 3000);
+                        })
+                        .catch((error) => {
+                            console.error('Failed to copy email address: ', error);
+                        });
+                });
+            });
+        </script>
     </body>
 </html>
