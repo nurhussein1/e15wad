@@ -49,7 +49,13 @@ Popular Book: "All the Light We Cannot See"
             {% for review in reviews %}
             <div class="review">
                 <div class="reviewer-info">
-                    <img src="{% static 'pfp.jpg' %}" alt="Reviewer Avatar">
+                    {% if review.user.userprofile.profilepicture %}
+                        <!-- Correctly reference the profile picture from the media folder -->
+                        <img src="{{ review.user.userprofile.profilepicture.url }}" alt="Reviewer Avatar">
+                    {% else %}
+                        <!-- Fallback avatar if no profile picture is available -->
+                        <img src="{% static 'default-avatar.png' %}" alt="Default Avatar">
+                    {% endif %}
                     <span class="reviewer-name">{{ review.user.username }}</span>
                 </div>
                 <div class="rating">
