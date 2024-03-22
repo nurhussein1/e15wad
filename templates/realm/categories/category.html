@@ -2,19 +2,14 @@
 {% load staticfiles %}
 
 {% block title_block %}
-Category
+{{ category.name }} Books
 {% endblock %}
 
 {% block body_block %}
-    <head>
-        <title>Reading Realm - {{ category.name }} Books</title>
-    </head>
-    
-    <body>
+<div class="outline">
         <h1>Reading Realm - {{ category.name }} Books</h1>
-        <div>
-            Embark on an Adventure in the {{ category.name }} Section
-            <strong>{{ boldmessage }}</strong><br />
+        <div class="quoteContainer">
+            <p class="quote">Embark on an Adventure in the {{ category.name }} Section</p>
         </div>
         <div class="user-options">
             <h2>{{ category.name }} Books</h2>
@@ -29,8 +24,7 @@ Category
         <div>
             <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
         </div>
-    
-    </body>
+    </div>
 
 
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'realm/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}Category{% endblock %}
+{% block title_block %}{{ book.title }}{% endblock %}
 
 {% block body_block %}
 {% if messages %}
@@ -17,25 +17,13 @@
     <style>
         a {
             color: blue;
-        }
-        .star-rating .star {
-            cursor: pointer;
-            font-size: 24px;
-            color: lightgray;
-        }
-        .star-rating .filled {
-            color: gold;
-        }
+        } 
     </style>
 </head>
 
-<body>
-    <header>
-        <h1>{{ book.title }}</h1>
-    </header>
-    <main>
-        <div>
-            <img src="{{book.bookcover}}" style="height: 1000px;width: 100%;" >
+<div class="container">
+        <div class="column">
+            <img class="bookImage" src="{{book.bookcover}}" style="height: 1000px;width: 100%;" >
             <blockquote>
                 {% if book.description %}
                 {{ book.description }}
@@ -43,17 +31,15 @@
                 No Description
                 {% endif %}
             </blockquote>
-        </div>
-        <div>
             <blockquote>
                 {% if book.estimatedreadingtime %}
-                {{ book.estimatedreadingtime }}
+                <p class="timeStamp">{{ book.estimatedreadingtime }}</p>
                 {% else %}
-                No Estimated Reading Time Specified
+                <p class="timeStamp">No Estimated Reading Time Specified</p>
                 {% endif %}
             </blockquote>
         </div>
-
+        <div class="column">
         {% if user.is_authenticated %}
         <div style="text-align: center; padding: 20px;">
             <a href="{% url 'realm:purchase_book' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
@@ -63,17 +49,17 @@
         {% else %}
         <div style="text-align: center;"><p>You must be logged in to make a purchase or rent a book.</p></div>
         {% endif %}
-    </main>
-    <footer>
-        <p>Find Out More <a href="{{ book.url }}">Here</a></p>
-        <p>About the <a href="{{ book.author }}">Author</a></p>
-        <p>Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
+
+        <p id="plain">Find Out More <a href="{{ book.url }}">Here</a></p>
+        <p id="plain">About the <a href="{{ book.author }}">Author</a></p>
+        <p id="plain">Return back to <a href="{% url 'realm:Categories' %}">Categories</a></p><br />
         {% if user_has_purchased or user_has_active_rental %}
         <p>Read the book <a href="{% url 'realm:read_book' book.slug %}">Read Book</a></p><br />
         {% else %}
         <p>You must purchase/rent the book to read it.</p>
         {% endif %}
-    </footer>
+        <hr>
+
 
     <div>
         <h2>Reviews</h2>
@@ -137,7 +123,8 @@
 {% endif %}
 
 </div>
-
+</div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.star-rating .star').forEach(function(star, index) {
@@ -156,7 +143,6 @@
         });
     });
 </script>
-</body>
 {% endblock %}
 
        

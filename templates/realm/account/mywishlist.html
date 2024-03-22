@@ -1,21 +1,35 @@
 {% extends 'realm/base.html' %}
 {% block body_block %}
-<div>
-    <h2>My Wishlist:</h2>
-    {% if wishlist %}
+<div class="outline">
+    <div class="profileContainer">
+        {% if profile_picture_url %}
+            <img id="pfp" src="{{ profile_picture_url }}" alt="Profile Picture">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+        <h1>Welcome to your profile, {{ user.username }}</h1>
+    </div>
+    <hr />
+    <div class="user-options">
+        <strong>{{ boldmessage }}</strong><br>
         <ul>
-        {% for book in wishlist %}
-            <li><a href="{% url 'realm:book' book.book.slug %}">{{ book.book.title }}</a> </li>
-        {% endfor %}
+            <li><a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a></li>
+            <li><a href="{% url 'realm:MyReviews' %}">My Reviews</a></li>
+            <li><a href="{% url 'realm:MyWishList' %}">My Wishlist</a></li>
+            <li><a href="{% url 'realm:MyBooks' %}">My Books</a></li>
         </ul>
+    </div>        
+</div>
+<div class="outline">
+    <h1>My Wishlist:</h1>
+    {% if wishlist %}
+        {% for book in wishlist %}
+        <h2><a href="{% url 'realm:book' book.book.slug %}">{{ book.book.title }}</a></h2>
+        {% endfor %}
     {% else %}
         <p>You have not got any books on your Wishlist.</p>
     {% endif %}
 
-</div>
-
-<div>
-    <a href="/realm/account">Back to My Account</a><br />
 </div>
 
 {% endblock %}

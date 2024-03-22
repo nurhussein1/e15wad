@@ -1,31 +1,42 @@
 {% extends 'realm/base.html' %}
 {% block body_block %}
-<div>
-    <h2>My Purchased Books:</h2>
-    {% if purchased_books %}
+<div class="outline">
+    <div class="profileContainer">
+        {% if profile_picture_url %}
+            <img id="pfp" src="{{ profile_picture_url }}" alt="Profile Picture">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+        <h1>Welcome to your profile, {{ user.username }}</h1>
+    </div>
+    <hr />
+    <div class="user-options">
+        <strong>{{ boldmessage }}</strong><br>
         <ul>
-        {% for purchase in purchased_books %}
-            <li><a href="{% url 'realm:book' purchase.book.slug %}">{{ purchase.book.title }}</a> - Purchased on: {{ purchase.purchase_date }}</li>
-        {% endfor %}
+            <li><a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a></li>
+            <li><a href="{% url 'realm:MyReviews' %}">My Reviews</a></li>
+            <li><a href="{% url 'realm:MyWishList' %}">My Wishlist</a></li>
+            <li><a href="{% url 'realm:MyBooks' %}">My Books</a></li>
         </ul>
+    </div>        
+</div>
+<div class="outline">
+    <h1>My Purchased Books:</h1>
+    {% if purchased_books %}
+        {% for purchase in purchased_books %}
+            <h2><a href="{% url 'realm:book' purchase.book.slug %}">{{ purchase.book.title }}</a></h2> <p class="timeStamp"> Purchased on: {{ purchase.purchase_date }}</p>
+        {% endfor %}
     {% else %}
         <p>You have not purchased any books yet.</p>
     {% endif %}
 
-    <h2>My Rented Books:</h2>
+    <h1>My Rented Books:</h1>
     {% if rented_books %}
-        <ul>
         {% for rental in rented_books %}
-            <li><a href="{% url 'realm:book' rental.book.slug %}">{{ rental.book.title }}</a> - Rented on: {{ rental.rental_date }} (expires on {{ rental.rental_end_date }})</li>
+            <h2><a href="{% url 'realm:book' rental.book.slug %}">{{ rental.book.title }}</a></h2><p class="timeStamp"><p class="timeStamp">- Rented on: {{ rental.rental_date }} (expires on {{ rental.rental_end_date }})</p>
         {% endfor %}
-        </ul>
     {% else %}
         <p>You have not rented any books yet.</p>
     {% endif %}
 </div>
-
-<div>
-    <a href="/realm/account">Back to My Account</a><br />
-</div>
-
 {% endblock %}

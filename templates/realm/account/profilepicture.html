@@ -8,17 +8,33 @@ Change Profile Picture
 
 
 {% block body_block %}
-<body>
+<div class="outline">
+    <div class="profileContainer">
+        {% if profile_picture_url %}
+            <img id="pfp" src="{{ profile_picture_url }}" alt="Profile Picture">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+        <h1>Welcome to your profile, {{ user.username }}</h1>
+    </div>
+    <hr />
+    <div class="user-options">
+        <strong>{{ boldmessage }}</strong><br>
+        <ul>
+            <li><a href="{% url 'realm:ProfilePictures' %}">Change Profile Picture</a></li>
+            <li><a href="{% url 'realm:MyReviews' %}">My Reviews</a></li>
+            <li><a href="{% url 'realm:MyWishList' %}">My Wishlist</a></li>
+            <li><a href="{% url 'realm:MyBooks' %}">My Books</a></li>
+        </ul>
+    </div>        
+</div>
+<div class="outline">
     <h2>Change Profile Picture</h2>
 
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="profile_pic">
-        <button type="submit">Upload</button>
+        <button class="delete-review-button"type="submit">Upload</button>
     </form>
-    
-
-    <div>
-        <a href="/realm/account">Back to My Account</a><br />
-    </div>
+</div> 
 {% endblock %}

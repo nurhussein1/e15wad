@@ -5,18 +5,17 @@
     box-sizing: border-box;
 }
 
-/* h1 {
+h1 {
     margin-top: 2%;
-    margin-bottom: 20px;
-    margin-left: 25px;
+    margin-bottom: 2%;
     color: rgb(0, 0, 0);
     font-family: Helvetica;
     text-align: left;
-} */
+}
 
 h2 {
-    margin-top: 7%;
-    margin-bottom: 7%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     color: #0870a1;
 }
 
@@ -63,6 +62,18 @@ p {
     padding: 5px
 }
 
+#plain{
+    font-size: 18px;
+    outline: none;
+    background-color: #9AD0C2;
+    padding: 5px
+}
+
+a{
+    text-decoration: none;
+    color: #0870a1;
+}
+
 .page-contents {
     opacity: 1;
     transition: opacity 1.5s ease; /* Apply transition effect to opacity */
@@ -81,6 +92,12 @@ div .outline{
     margin-bottom: 20px;
 }
 
+.timeStamp{
+    font-size: 12px;
+    font-style:italic;
+    outline:none;
+    background-color: #9AD0C2;
+}
 
 
 /* ------------------------------ALL THE NAV BAR STUFF ----------------------------*/
@@ -190,15 +207,12 @@ div .outline{
     overflow: hidden;
     width: 100%;
     max-width: 600px;
-    /* Adjust the maximum width as needed */
     margin: auto;
     outline: 5px solid #265073;
     background-color: #2D9596;
     display: flex;
     justify-content: center;
-    /* Horizontally center the inner div */
     align-items: center;
-    /* Vertically center the inner div */
 }
 
 .slide {
@@ -606,6 +620,29 @@ img {
     background-color: #0870a1; /* Darker shade of primary color on hover */
 }
 
+.quoteContainer {
+    position: relative;
+    margin:0;
+    padding:10px;
+}
+
+.quote {
+    font-size: 18px;
+    outline: none;
+    background-color: #9AD0C2;
+    padding: 0px;
+}
+
+.quote::before {
+    content: "";
+    position: absolute;
+    left: -2px; /* Adjust the position as needed */
+    top: 0;
+    bottom: 0;
+    width: 3px; /* Width of the vertical bar */
+    background-color: #333; /* Color of the vertical bar */
+}
+
 /* ----------------------------------------------------- ACCOUNT PAGE ---------------------------------------------------------------- */
 
 .profileContainer {
@@ -645,4 +682,40 @@ img {
     outline: 3px solid #265073;
     background-color: #2D9596;
     padding: 5px;
+}
+
+/* ----------------------------------------------------- BOOK STYLING ------------------------------------------ */
+.bookImage{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    outline: 5px solid #265073;
+    background-color: #2D9596;
+    display: block; /* Ensure the image is treated as a block element */
+    margin: 0 auto; /* Center the image horizontally */
+    margin-bottom: 20px;
+}
+
+.star-rating .star {
+    cursor: pointer;
+    font-size: 24px;
+    color: lightgray;
+}
+.star-rating .filled {
+    color: gold;
+}
+
+.filled-star {
+    color: gold;
+    font-size: 24px;
+}
+.empty-star {
+    color: lightgray;
+    font-size: 24px;
+}
+.rating label {
+    font-weight: bold;
+    margin-right: 5px;
 }
