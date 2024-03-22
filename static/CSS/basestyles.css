@@ -232,6 +232,34 @@ img {
     right: 0;
 }
 
+/* Styling for banner */
+.banner {
+    background-color: #2D9596;
+    color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+/* Styling for filler text */
+.filler-text {
+    margin-top: 20px;
+    line-height: 1.6;
+}
+.offer-sign {
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 50% 50% 0 0;
+    border: 5px solid black;
+    box-shadow: 0 0 20px rgb(255, 255, 255);
+    margin-bottom: 70px;
+    margin-left: 20px;
+}
+.banner,
+.banner h3 {
+    color: black;
+}
 /* ----------------------------------------ABOUT PAGE STYLING--------------------------------- */
 
 
