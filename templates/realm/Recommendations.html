@@ -9,13 +9,11 @@ Recommendations
 {% block body_block %}
     {% if userprofile.selected_favourites %}
     <h1>Welcome to the reading realm!</h1>
-    <h2>Here are some books we think you'll like to get you started!</h2>
-    <div>
-        <ul>
+    <div class="recOutline">
+    <h1>Here are some books we think you'll like to get you started!</h1>
             {% for book in recommended_books %}
-                <li><a href="{% url 'realm:book' book.slug%}">{{ book.title }}</a></li>
+            <h2><a href="{% url 'realm:book' book.slug%}">{{ book.title }}</a></h2>
             {% endfor %}
-        </ul>
     </div>
     {% else %}
     <p>Looks like you haven't selected you're favourite categories yet. <a href="{% url 'realm:FavouriteCategories' %}">Click here</a> to select them</p>

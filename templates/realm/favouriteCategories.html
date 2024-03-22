@@ -7,18 +7,17 @@ Select Favourite Categories
 
 
 {% block body_block %}
-    {% if not userprofile.selected_favourites %}
     <h1>Pick up to 3 of your favourite categories</h1>
-    <div>
+    <div class="outline">
         <form id="favourite_form" method="post" action="{% url 'realm:FavouriteCategories' %}">
             {% csrf_token %}
             {% for category in categories %}
                 <input class="favourite_category_checkbox" type="checkbox" name={{category.name}} value={{category}}> {{category.name}}<br>
             {% endfor %}
-            <input type="submit" value="submit" />
+            <input class="delete-review-button" type="submit" value="submit" >
         </form>
     </div>
-    {% else %}
+    {% if userprofile.selected_favourites %}
     <p>Thanks for selecting your favourites! <a href="{% url 'realm:Recommendations' %}">Click here</a> to get some personalised recommendations!</p>
     {% endif %}
 {% endblock %}
