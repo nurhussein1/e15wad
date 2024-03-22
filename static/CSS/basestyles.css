@@ -45,13 +45,9 @@ div:not(.navigation) {
 
 hr {
     border: none;
-    /* Remove default border */
     height: 3px;
-    /* Increase thickness */
     background-color: #265073;
-    /* Change color */
     margin: 20px 0;
-    /* Add margin for spacing */
     border-radius: 5px;
 }
 
@@ -76,7 +72,7 @@ a{
 
 .page-contents {
     opacity: 1;
-    transition: opacity 1.5s ease; /* Apply transition effect to opacity */
+    transition: opacity 1.5s ease;
 }
 
 .plain {
@@ -141,17 +137,17 @@ div .outline{
 
 #accountPFP {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
 }
 
 #accountPFP img {
-    width: 30px; /* Set the width of the image */
-    height: 30px; /* Set the height of the image */
-    margin: 0 auto; /* Center the image horizontally */
-    display: block; /* Ensure the image is treated as a block element */
-    margin-bottom: 5px; /* Add some space between the image and the link */
+    width: 30px;
+    height: 30px; 
+    margin: 0 auto; 
+    display: block; 
+    margin-bottom: 5px;
 }
 
 
@@ -180,9 +176,7 @@ div .outline{
 
 .column {
     flex: 1;
-    /* Distribute available space equally */
     padding: 10px;
-    /* Adjust padding as needed */
     outline: 3.5px solid #265073;
 }
 
@@ -342,26 +336,23 @@ img {
 .bookCentre {
     display: flex;
     justify-content: center;
-    /* Center horizontally */
     align-items: center;
-    /* Center vertically */
     height: 100vh;
-    /* Set container height to viewport height */
 }
 
 
 /* ---------------------------------------Account Page Styling ------------------------------- */
 
 #pfp {
-    width: 200px; /* Set the width to 200 pixels */
-    height: 200px; /* Set the height to 200 pixels */
+    width: 200px; 
+    height: 200px; 
     margin-right: 5%;
 }
 
 .profileContainer {
     display: flex;
-    align-items: center; /* Align items vertically */
-    width: fit-content; /* Adjust width to fit content */
+    align-items: center; 
+    width: fit-content; 
 }
 
 .user-options {
@@ -384,7 +375,7 @@ img {
 
 .user-options li {
     display: inline-block;
-    margin-right: 10px; /* Adjust spacing between tabs */
+    margin-right: 10px; 
 }
 
 .user-options a {
@@ -528,28 +519,28 @@ img {
     margin-bottom: 100px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Add transition effect for smoother hover */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; 
 }
 
 .add-review-button:hover,
 .delete-review-button:hover {
-    background-color: #0870a1; /* Change background color on hover */
+    background-color: #0870a1;
 }
 
 .delete-review-button {
-    background-color: #265073; /* Button background color */
-    color: #fff; /* Button text color */
-    border: none; /* Remove button border */
-    padding: 8px 16px; /* Add padding to the button */
+    background-color: #265073; 
+    color: #fff; 
+    border: none;
+    padding: 8px 16px; 
     margin-top:10px;
     cursor: pointer;
-    border-radius: 5px; /* Add border radius for rounded corners */
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Add transition effect for smoother hover */
+    border-radius: 5px; 
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; 
 }
 
 .delete-review-button-container {
-    position: relative; /* Change position to relative */
-    margin-top: 20px; /* Add margin-top for spacing */
+    position: relative; 
+    margin-top: 20px; 
 }
 
 /* ----------------------------------------------- CATEGORIES PAGE -------------------------------------------------------- */
@@ -571,7 +562,7 @@ img {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    white-space: nowrap; /* Prevent button text from wrapping */
+    white-space: nowrap; 
     margin-left:5px
 }
 
@@ -598,22 +589,22 @@ img {
 }
 
 .catLink {
-    display: block; /* Make the link behave like a block element */
-    margin: 0 auto; /* Center the block element horizontally */
-    padding: 10px 20px; /* Adjust padding as needed */
-    background-color: #2D9596; /* Your site's primary color */
-    color: #fff; /* Text color */
-    text-decoration: none; /* Remove underline */
+    display: block; 
+    margin: 0 auto; 
+    padding: 10px 20px;
+    background-color: #2D9596; 
+    color: #fff; 
+    text-decoration: none; 
     border: none;
-    border-radius: 5px; /* Rounded corners */
-    font-size: 16px; /* Adjust font size as needed */
+    border-radius: 5px; 
+    font-size: 16px; 
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease; 
     outline: 3px solid #265073;
 }
 
 .catLink:hover {
-    background-color: #0870a1; /* Darker shade of primary color on hover */
+    background-color: #0870a1; 
 }
 
 .quoteContainer {
@@ -632,22 +623,22 @@ img {
 .quote::before {
     content: "";
     position: absolute;
-    left: -2px; /* Adjust the position as needed */
+    left: -2px; 
     top: 0;
     bottom: 0;
-    width: 3px; /* Width of the vertical bar */
-    background-color: #333; /* Color of the vertical bar */
+    width: 3px; 
+    background-color: #333; 
 }
 
 /* ----------------------------------------------------- ACCOUNT PAGE ---------------------------------------------------------------- */
 
 .profileContainer {
     display: flex;
-    align-items: center; /* Align items vertically */
-    width: fit-content; /* Adjust width to fit content */
+    align-items: center; 
+    width: fit-content;
 }
 .profileContainer h1 {
-    margin-left: 30px; /* Remove default margin */
+    margin-left: 30px; 
 }
 
 /* ----------------------------------------------------- FOOTER ---------------------------------------------------------------- */
@@ -670,7 +661,6 @@ img {
 .email-dialog.show {
     display: inline-block;
     opacity: 1;
-<<<<<<< HEAD
 }
 
 .errorlist {
@@ -690,8 +680,8 @@ img {
     margin: auto;
     outline: 5px solid #265073;
     background-color: #2D9596;
-    display: block; /* Ensure the image is treated as a block element */
-    margin: 0 auto; /* Center the image horizontally */
+    display: block;
+    margin: 0 auto; 
     margin-bottom: 20px;
 }
 
@@ -715,6 +705,20 @@ img {
 .rating label {
     font-weight: bold;
     margin-right: 5px;
-=======
->>>>>>> 521ddb9b5bc8c4b74c78cf9fabcdcb89f08f8cb2
+}
+
+.recOutline {
+    outline: 5px solid #265073;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.recOutline h2 {
+    flex: 0 0 100%; 
+}
+
+.recOutline h2 a {
+    text-decoration: none;
+    color: #0870a1;
+    margin-right: 20px; 
 }
