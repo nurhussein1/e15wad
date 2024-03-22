@@ -246,7 +246,6 @@ img {
     right: 0;
 }
 
-/* Styling for banner */
 .banner {
     background-color: #2D9596;
     color: #fff;
@@ -255,7 +254,6 @@ img {
     margin-bottom: 100px;
 }
 
-/* Styling for filler text */
 .filler-text {
     margin-top: 20px;
     line-height: 1.6;
@@ -320,7 +318,6 @@ img {
 }
 
 .founder img {
-
     width: 150px;
     background-color: #2D9596;
 }
@@ -457,8 +454,7 @@ img {
 }
 
 .buy-link,
-.rent-link,
-.wishlist-link  {
+.rent-link {
     color: #265073;
     text-decoration: none;
     margin-right: 5px;
@@ -674,6 +670,7 @@ img {
 .email-dialog.show {
     display: inline-block;
     opacity: 1;
+<<<<<<< HEAD
 }
 
 .errorlist {
@@ -718,4 +715,6 @@ img {
 .rating label {
     font-weight: bold;
     margin-right: 5px;
+=======
+>>>>>>> 521ddb9b5bc8c4b74c78cf9fabcdcb89f08f8cb2
 }
