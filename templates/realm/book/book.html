@@ -35,6 +35,7 @@
     </header>
     <main>
         <div>
+            <img src="{{book.bookcover}}" height=75 width=35 style="height: 945px;width: 100%;" >
             <blockquote>
                 {% if book.description %}
                 {{ book.description }}
@@ -117,7 +118,7 @@
         
         <!-- Star rating -->
         <div class="star-rating">
-            {% for value in "12345" %}
+            {% for value in star_range %}
             <input type="radio" name="rating" value="{{ value }}" id="rating-{{ value }}" {% if forloop.first %}checked{% endif %} class="rating-radio" hidden>
             <label for="rating-{{ value }}" class="star">&#9733;</label>
             {% endfor %}
