@@ -278,7 +278,7 @@ def confirm_rental(request, book_id):
         if request.user.is_authenticated:
             rental = Rental.objects.create(user=request.user, book=book, rental_end_date=timezone.now() + datetime.timedelta(weeks=1))
             messages.success(request, "You have successfully rented this book for a week.")
-            return redirect('realm:orderConfirmation', rental.id)
+            return redirect('realm:orderConfirmation', rental.book.id)
         else:
             messages.error(request, "You need to be logged in to rent a book.")
             return redirect('login')
