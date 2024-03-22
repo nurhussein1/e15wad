@@ -30,7 +30,8 @@ def categories(request):
 def popularbooks(request):
     context_dict = {}
     
-    popular_book = Book.objects.filter(title="All the Light We Cannot See").first()
+    popular_book = Book.objects.order_by('-views').first()
+
     user = request.user
     
     reviews = popular_book.reviews.all() if popular_book else None
