@@ -16,17 +16,13 @@ from django.http import HttpResponseRedirect
 from os.path import join
 
 def home(request):
- 
- context_dict = {'boldmessage': 'test that context_dict works'}
- return render(request, 'realm/home.html', context=context_dict)
+ return render(request, 'realm/home.html')
 
 def about(request):
- context_dict = {'boldmessage': 'this is the about page, test that context_dict works'}
- return render(request, 'realm/about.html', context=context_dict)
+ return render(request, 'realm/about.html')
 
 def categories(request):
     context_dict = {
-        'boldmessage': 'this is the categories page, test that context_dict works',
         'categories': Category.objects.all()
     }
     return render(request, 'realm/categories.html', context=context_dict)
