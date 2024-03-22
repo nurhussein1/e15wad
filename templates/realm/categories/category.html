@@ -16,13 +16,13 @@ Category
             Embark on an Adventure in the {{ category.name }} Section
             <strong>{{ boldmessage }}</strong><br />
         </div>
-        <div>
+        <div class="user-options">
             <h2>{{ category.name }} Books</h2>
             <ul>
                 {% for book in books %}
                     <li><a href="{% url 'realm:book' book.slug%}">{{ book.title }}</a></li>
                 {% empty %}
-                    <li>No historical books found.</li>
+                    <li>No books found.</li>
                 {% endfor %}
             </ul>
         </div>
