@@ -35,7 +35,7 @@
     </header>
     <main>
         <div>
-            <img src="{{book.bookcover}}" height=75 width=35 style="height: 945px;width: 100%;" >
+            <img src="{{book.bookcover}}" style="height: 1000px;width: 100%;" >
             <blockquote>
                 {% if book.description %}
                 {{ book.description }}
@@ -56,9 +56,9 @@
 
         {% if user.is_authenticated %}
         <div style="text-align: center; padding: 20px;">
-            <a href="{% url 'realm:purchase_book' book.id %}" class="buy-link">Purchase</a><span class="price">${{ book.purchase_price }}</span>
-            <a href="{% url 'realm:rent_book' book.id %}" class="rent-link">Rent</a><span class="price">${{ book.rent_price }}</span>
-            <a href="{% url 'realm:add_to_wishlist' book.id %}" class="wishlist-link">Add to Wishlist</a>
+            <a href="{% url 'realm:purchase_book' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Purchase</a>
+            <a href="{% url 'realm:rent_book' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Rent</a>
+            <a href="{% url 'realm:add_to_wishlist' book.id %}" style="background-color: rgb(45, 149, 150); color: white; padding: 10px 15px; border: none; border-radius: 20px; text-decoration: none;">Add to Wishlist</a>
         </div>
         {% else %}
         <div style="text-align: center;"><p>You must be logged in to make a purchase or rent a book.</p></div>

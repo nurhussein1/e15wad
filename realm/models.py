@@ -31,7 +31,7 @@ class Book(models.Model):
     views = models.IntegerField(default=0)
     description=models.TextField(null=True)
     slug=models.SlugField(unique=True)
-    # bookcover = models.ImageField()
+    bookcover = models.ImageField(blank=True)
     estimatedreadingtime=models.TextField(null=True,default="0hrs 30mins")
     author = models.URLField()
     rent_price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)

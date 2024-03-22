@@ -148,6 +148,7 @@ def add_book(cat, title,description, url, rent_price, purchase_price, author="",
     p.url = url
     p.estimatedreadingtime = f"{estimatedreadingtime}"
     p.description = f"{description}"
+    p.bookcover = f"/{kwargs.get('image')}"
     p.author = author
     p.views =views
     p.rent_price = rent_price
