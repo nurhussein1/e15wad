@@ -5,6 +5,7 @@ from django.db.models.base import Model
 from django.forms.utils import ErrorList
 from realm.models import Book,Category, Review,UserProfile
 from registration.forms import RegistrationForm
+from django.utils.translation import gettext, gettext_lazy as _
 
 
 class CategoryForm(forms.ModelForm):
@@ -16,6 +17,12 @@ class CategoryForm(forms.ModelForm):
         fields = ('name',)
 
 class UserForm(RegistrationForm):
+    password1 = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput,
+    )
+
     profilepicture = forms.ImageField(required = False)
 
 class BookForm(forms.ModelForm):

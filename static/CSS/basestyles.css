@@ -638,3 +638,11 @@ img {
     display: inline-block;
     opacity: 1;
 }
+
+.errorlist {
+    margin: 10px;
+    font-size: 18px;
+    outline: 3px solid #265073;
+    background-color: #2D9596;
+    padding: 5px;
+}
