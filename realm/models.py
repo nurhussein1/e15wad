@@ -34,6 +34,8 @@ class Book(models.Model):
     # bookcover = models.ImageField()
     estimatedreadingtime=models.TextField(null=True,default="0hrs 30mins")
     author = models.URLField()
+    rent_price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
+    purchase_price = models.DecimalField(max_digits=6, decimal_places=2, default=0.00)
 
     def save(self,*args,**kwargs):
         self.slug=slugify(self.title)

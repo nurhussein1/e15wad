@@ -20,7 +20,9 @@ def populate():
             'estimatedreadingtime': 'Estimated Reading Time: 7 hours',
             'author': 'https://en.wikipedia.org/wiki/Jane_Austen',
             'image':'static/bookCovers/classics_books/PrideAndPrejudice.jpg',
-            'views':12},
+            'views':12,
+            'rent_price': 1.99,
+            'purchase_price': 9.99,},
 
         {'title': 'To Kill a Mockingbird',
          'description' : "To Kill a Mockingbird takes place in the fictional town of Maycomb, Alabama, during the Great Depression. The protagonist is Jean Louise (“Scout”) Finch, an intelligent though unconventional girl who ages from six to nine years old during the course of the novel. She is raised with her brother, Jeremy Atticus" ,
@@ -28,7 +30,9 @@ def populate():
          'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
          'author': 'https://en.wikipedia.org/wiki/Harper_Lee',
          'image':'static/bookCovers/classics_books/ToKillAMockingbird.jpg',
-         'views':122}
+         'views':122,
+         'rent_price': 2.99,
+        'purchase_price': 12.99}
     ]
 
     fantasy_books = [
@@ -38,7 +42,8 @@ def populate():
          'estimatedreadingtime': 'Estimated Reading Time: 3 hours and 43 minutes',
          'author': 'https://en.wikipedia.org/wiki/J._K._Rowling',
          'image':'static/bookCovers/fantasy_books/HarryPotter.jpg' ,
-         'views':112},
+         'views':112,'rent_price': 4.99,
+        'purchase_price': 19.99},
 
          {'title': 'The Hobbit',
          'description' : "In a HOLE in the ground there lived a hobbit.”. Bilbo Baggins lives a quiet, peaceful life in his comfortable hole at Bag End. One day his comfort is shattered by the arrival of Gandalf the Wizard, who persuades Bilbo to set out on an adventure with a group of thirteen" ,
@@ -46,7 +51,9 @@ def populate():
             'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 20 minutes',
             'author': 'https://en.wikipedia.org/wiki/J._R._R._Tolkien',
             'image':'static/bookCovers/fantasy_books/TheHobbit.jpg',
-            'views':1321}
+            'views':1321,
+            'rent_price': 5.99,
+            'purchase_price': 24.99}
     ]
 
     historical_books = [
@@ -56,7 +63,9 @@ def populate():
          'estimatedreadingtime': 'Estimated Reading Time: 8 hours and 51 minutes',
          'author': 'https://en.wikipedia.org/wiki/Anthony_Doerr',
          'image':'static/bookCovers/historical_books/AllTheLightWeCannotSee.jpg',
-         'views': 131},
+         'views': 131,
+         'rent_price': 1.99,
+        'purchase_price': 8.99},
 
         {'title': 'The Book Thief',
          'description' : "So begins Liesel's love affair with books and words, and soon she is stealing from Nazi book-burnings, the mayor's wife's library . . . wherever there are books to be found." ,
@@ -64,7 +73,9 @@ def populate():
             'estimatedreadingtime': 'Estimated Reading Time: 10 hours and 8 minutes',
             'author': 'https://en.wikipedia.org/wiki/Markus_Zusak',
         'image':'static/bookCovers/historical_books/TheBookThief.jpg',
-        'views':13}
+        'views':13,
+        'rent_price': 1.99,
+        'purchase_price': 7.99}
     ]
 
     scifi_books = [
@@ -74,7 +85,9 @@ def populate():
          'estimatedreadingtime': 'Estimated Reading Time: 12 hours and 32 minutes',
          'author': 'https://en.wikipedia.org/wiki/Frank_Herbert',
          'image':'static/bookCovers/scifi_books/Dune.jpg',
-         'views':156},
+         'views':156,
+         'rent_price': 5.99,
+        'purchase_price': 24.99},
         
         {'title': 'Ender’s Game',
          'description' : "Andrew 'Ender' Wiggin thinks he is playing computer simulated war games; he is, in fact, engaged in something far more desperate. The result of genetic experimentation, Ender may be the military genius Earth desperately needs in a war against an alien enemy seeking to destroy all human life. The only way to find out is to throw Ender into ever harsher training, to chip away and find the diamond inside, or destroy him utterly. Ender Wiggin is six years old when it begins." ,
@@ -82,7 +95,9 @@ def populate():
             'estimatedreadingtime': 'Estimated Reading Time: 5 hours and 57 minutes',
             'author': 'https://en.wikipedia.org/wiki/Orson_Scott_Card',
             'image':'static/bookCovers/scifi_books/EndersGame.jpg',
-            'views':312
+            'views':312,
+            'rent_price': 1.99,
+            'purchase_price': 9.99
         }
     ]
 
@@ -93,7 +108,9 @@ def populate():
          'estimatedreadingtime': 'Estimated Reading Time: 9 hours and 20 minutes',
          'author': 'https://en.wikipedia.org/wiki/Gillian_Flynn',
          'image':'static/bookCovers/thriller_books/GoneGirl.jpg',
-         'views':32
+         'views':32,
+         'rent_price': 0.99,
+        'purchase_price': 6.99,
         },
 
         {'title': 'The Girl with the Dragon Tattoo',
@@ -102,7 +119,9 @@ def populate():
          'estimatedreadingtime': 'Estimated Reading Time:11 hours and 12 minutes',
          'author': 'https://en.wikipedia.org/wiki/Stieg_Larsson',
          'image':'static/bookCovers/thriller_books/TheGirlWithTheDragonTattoo.jpg',
-         'views':2}
+         'views':2,
+         'rent_price': 4.99,
+        'purchase_price': 19.99}
     ]
 
     cats = {
@@ -124,13 +143,15 @@ def populate():
             print(f'- {c}: {p}')
 
 
-def add_book(cat, title,description, url, author="", estimatedreadingtime=0,views=0,  *args, **kwargs,):
+def add_book(cat, title,description, url, rent_price, purchase_price, author="", estimatedreadingtime=0,views=0,  *args, **kwargs,):
     p = Book.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
     p.estimatedreadingtime = f"{estimatedreadingtime}"
     p.description = f"{description}"
     p.author = author
     p.views =views
+    p.rent_price = rent_price
+    p.purchase_price = purchase_price
     p.save()
     return p
 

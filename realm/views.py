@@ -35,11 +35,18 @@ def popularbooks(request):
     context_dict = {}
     
     popular_book = Book.objects.filter(title="All the Light We Cannot See").first()
+    user = request.user
     
-    reviews = popular_book.reviews.all()
+    reviews = popular_book.reviews.all() if popular_book else None
     new_review = None
     
-    user_has_review = reviews.filter(user=request.user).exists() if request.user.is_authenticated else False
+    user_has_review = reviews.filter(user=user).exists() if user.is_authenticated and reviews else False
+    user_has_purchased = False
+    user_has_active_rental = False
+
+    if user.is_authenticated and popular_book:
+        user_has_purchased = Purchase.objects.filter(user=user, book=popular_book).exists()
+        user_has_active_rental = Rental.objects.filter(user=user, book=popular_book, rental_end_date__gte=timezone.now()).exists()
 
     if request.method == 'POST':
         if not user_has_review:
@@ -47,9 +54,9 @@ def popularbooks(request):
             if review_form.is_valid():
                 new_review = review_form.save(commit=False)
                 new_review.book = popular_book
-                new_review.user = request.user
+                new_review.user = user
                 new_review.save()
-                return redirect('popularbooks')
+                return redirect('popularbooks') 
     else:
         review_form = ReviewForm()
     
@@ -58,6 +65,8 @@ def popularbooks(request):
     context_dict['review_form'] = review_form
     context_dict['star_range'] = range(1, 6)
     context_dict['user_has_review'] = user_has_review
+    context_dict['user_has_purchased'] = user_has_purchased
+    context_dict['user_has_active_rental'] = user_has_active_rental
     
     return render(request, 'realm/popularbooks.html', context_dict)
 

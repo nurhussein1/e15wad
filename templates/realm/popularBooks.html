@@ -21,22 +21,29 @@ Popular Book: "All the Light We Cannot See"
         <hr />
         <div class="buy-rent-container">
             {% if user.is_authenticated %}
-                <a href="{% url 'realm:purchase_book' book.id %}" class="buy-link">Purchase</a><span class="price">$15.99</span>
-                <a href="{% url 'realm:rent_book' book.id %}" class="rent-link">Rent</a><span class="price">$5.99</span>
+                <a href="{% url 'realm:purchase_book' book.id %}" class="buy-link">Purchase</a><span class="price">${{ book.purchase_price }}</span>
+                <a href="{% url 'realm:rent_book' book.id %}" class="rent-link">Rent</a><span class="price">${{ book.rent_price }}</span>
             {% else %}
                 <p>You must be logged in to purchase or rent a book.</p>
             {% endif %}
             
         </div>
         <hr />
-        {% if user.is_authenticated and not user_has_review %}
-        <div class="add-review-button-container">
-            <button class="add-review-button" onclick="toggleReviewForm()">Add a Review</button>
-        </div>
-    {% elif user.is_authenticated and user_has_review %}
+        {% if user.is_authenticated %}
+    {% if user_has_purchased or user_has_active_rental %}
+        {% if not user_has_review %}
+            <div class="add-review-button-container">
+                <button class="add-review-button" onclick="toggleReviewForm()">Add a Review</button>
+            </div>
+        {% else %}
+        {% endif %}
     {% else %}
-        <p><a href="{% url 'realm:login' %}">Log in</a> to add a review.</p>
+        <p>You must purchase or rent the book to add a review.</p>
     {% endif %}
+{% else %}
+    <p><a href="{% url 'realm:login' %}">Log in</a> to add a review.</p>
+{% endif %}
+
 
         <div class="reviews-container">
             {% for review in reviews %}
@@ -115,5 +122,16 @@ Popular Book: "All the Light We Cannot See"
         });
     });
 </script>
+
+<style>
+    .star-rating .star {
+        cursor: pointer;
+        font-size: 24px;
+        color: lightgray;
+    }
+    .star-rating .filled {
+        color: gold;
+    }
+</style>
 
 {% endblock %}

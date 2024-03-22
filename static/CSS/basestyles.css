@@ -415,7 +415,8 @@ img {
 }
 
 .buy-link,
-.rent-link {
+.rent-link,
+.wishlist-link  {
     color: #265073;
     text-decoration: none;
     margin-right: 5px;
